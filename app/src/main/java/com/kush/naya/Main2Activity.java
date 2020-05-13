@@ -394,23 +394,13 @@ public class Main2Activity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> s) {
             ArrayAdapter<String> adapter = null;
             String product = null;
-            ArrayList<String> runArray = new ArrayList<>();
+            ArrayList<String> tempArray;
             super.onPostExecute(s);
-            for(int j = 0; j <5; j++){
-                product= s.get(j);
-                runArray.add(j,product);
-            }
-            String productstring = null;
-            ArrayList<String> tempArray = new ArrayList<>(Arrays.asList(productstring));
-            for(int k = 0; k<5; k++){
-                productstring = runArray.get(k);
-                tempArray.add(productstring);
-            }
-            for(int i = 0; i <5; i++){
-                adapter = new ArrayAdapter<String>(Main2Activity.this,android.R.layout.simple_list_item_1,tempArray);
+            for (int i = 0; i < 1; i++) {
+                tempArray = new ArrayList<>(Arrays.asList(product));
+                adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, s);
                 listview.setAdapter(adapter);
                 break;
-
             }
         }
 
