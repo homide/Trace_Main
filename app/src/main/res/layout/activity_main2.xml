@@ -4,112 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".Main2Activity">
-
-    <!--    <ScrollView-->
-    <!--        android:id="@+id/scrollView3"-->
-    <!--        android:layout_width="409dp"-->
-    <!--        android:layout_height="600dp"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent">-->
-
-    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
-    <!--            android:layout_width="409dp"-->
-    <!--            android:layout_height="600dp">-->
-
-    <!--            <LinearLayout-->
-    <!--                android:layout_width="380dp"-->
-    <!--                android:layout_height="250dp"-->
-    <!--                android:layout_marginTop="50sp"-->
-    <!--                android:orientation="vertical"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintHorizontal_bias="0.5"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toBottomOf="parent">-->
-
-    <!--                <TextView-->
-    <!--                    android:id="@+id/snapdealText"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:text="@string/SnapDeal" />-->
-    <!--            </LinearLayout>-->
-
-    <!--            <LinearLayout-->
-    <!--                android:id="@+id/linearLayout4"-->
-    <!--                android:layout_width="380dp"-->
-    <!--                android:layout_height="250dp"-->
-    <!--                android:layout_marginTop="50sp"-->
-    <!--                android:orientation="vertical"-->
-    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintHorizontal_bias="0.5"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toBottomOf="@+id/linearLayout6">-->
-
-    <!--                <TextView-->
-    <!--                    android:id="@+id/amazonText"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:text="@string/Amazon" />-->
-    <!--            </LinearLayout>-->
-
-    <!--            <LinearLayout-->
-    <!--                android:id="@+id/linearLayout6"-->
-    <!--                android:layout_width="380dp"-->
-    <!--                android:layout_height="250dp"-->
-    <!--                android:orientation="vertical"-->
-    <!--                app:layout_constraintBottom_toTopOf="@+id/linearLayout4"-->
-    <!--                app:layout_constraintEnd_toEndOf="parent"-->
-    <!--                app:layout_constraintHorizontal_bias="0.448"-->
-    <!--                app:layout_constraintStart_toStartOf="parent"-->
-    <!--                app:layout_constraintTop_toTopOf="parent">-->
-
-    <!--                <TextView-->
-    <!--                    android:id="@+id/flipkartText"-->
-    <!--                    android:layout_width="match_parent"-->
-    <!--                    android:layout_height="wrap_content"-->
-    <!--                    android:text="@string/Flipkart" />-->
-    <!--            </LinearLayout>-->
-    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
-    <!--    </ScrollView>-->
-
 
     <EditText
         android:id="@+id/btnClick2"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_width="262dp"
+        android:layout_height="53dp"
         android:autofillHints=""
-        android:background="#00FFFFFF"
+        android:background="@drawable/custom_search_bar"
         android:ems="10"
-        android:hint="@string/searchButton"
+        android:hint="@string/searchText"
+        android:drawableLeft="@drawable/ic_action_search"
+        android:drawableStart="@drawable/ic_action_search"
         android:inputType="textPersonName"
         android:textColorLink="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toStartOf="@+id/btnSearch2"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnSearch2"
-        android:layout_width="wrap_content"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:background="@drawable/custom_button"
+        android:onClick="btnClick2"
         android:text="@string/searchButton"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.508" />
 
     <ScrollView
-        android:layout_width="408dp"
-        android:layout_height="607dp"
-        android:layout_marginTop="64dp"
+        android:id="@+id/scrollView"
+        android:layout_width="0dp"
+        android:layout_height="730dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.333"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnClick2">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.992">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -117,9 +55,8 @@
             android:orientation="vertical">
 
             <ListView
-                android:id="@+id/listView"
                 android:layout_width="match_parent"
-                android:layout_height="607dp" />
+                android:layout_height="wrap_content" />
         </LinearLayout>
     </ScrollView>
 
