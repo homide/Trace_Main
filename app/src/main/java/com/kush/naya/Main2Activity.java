@@ -168,7 +168,7 @@ public class Main2Activity extends AppCompatActivity {
             super.onPostExecute(s);
             for(int i = 0; i <1; i++){
                 tempArray = new ArrayList<>(Arrays.asList(product));
-                adapter = new ArrayAdapter<String>(Main2Activity.this,android.R.layout.simple_list_item_1,tempArray);
+                adapter = new ArrayAdapter<String>(Main2Activity.this,android.R.layout.simple_list_item_1,s);
                 listview.setAdapter(adapter);
                 break;
 
@@ -392,6 +392,7 @@ public class Main2Activity extends AppCompatActivity {
     private class Paytm extends AsyncTask<String, Void, ArrayList<String>>{
         @Override
         protected void onPostExecute(ArrayList<String> s) {
+            ArrayAdapter<String> adapter = null;
             String product = null;
             ArrayList<String> runArray = new ArrayList<>();
             super.onPostExecute(s);
@@ -401,13 +402,14 @@ public class Main2Activity extends AppCompatActivity {
             }
             String productstring = null;
             ArrayList<String> tempArray = new ArrayList<>(Arrays.asList(productstring));
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this,android.R.layout.simple_list_item_1,tempArray);
             for(int k = 0; k<5; k++){
                 productstring = runArray.get(k);
                 tempArray.add(productstring);
             }
             for(int i = 0; i <5; i++){
+                adapter = new ArrayAdapter<String>(Main2Activity.this,android.R.layout.simple_list_item_1,tempArray);
                 listview.setAdapter(adapter);
+                break;
 
             }
         }
