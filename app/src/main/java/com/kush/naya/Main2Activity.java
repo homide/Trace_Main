@@ -28,6 +28,7 @@ public class Main2Activity extends AppCompatActivity {
     public Button button2;
     public EditText usersearch;
     public String searchmain;
+    ArrayList<String> allproducts = new ArrayList<String>();
 
 
     public void btnClick2(View view) {
@@ -48,12 +49,14 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
+
+
         View.OnClickListener view = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i<5; i++){
                     switch (i){
-//                        case 1:
+                        case 1:
 //                            Flipkart flip = new Flipkart();
 //                            flip.execute("https://www.flipkart.com/search?q=" +usersearch.getText()+ "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
 //                            break;
@@ -67,12 +70,17 @@ public class Main2Activity extends AppCompatActivity {
                             Paytm pyt = new Paytm();
                             pyt.execute("https://www.paytmmall.com/shop/search?q=" + usersearch.getText() + "&from=organic&child_site_id=6");
                             break;
+                        case 4:
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts);
+                            listview.setAdapter(adapter);
+                            break;
 
                     }
                 }
 
             }
         };
+
         button2.setOnClickListener(view);
 
 
@@ -82,14 +90,11 @@ public class Main2Activity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> s) {
             ArrayAdapter<String> adapter = null;
             String product = null;
-            ArrayList<String> tempArray;
+            ArrayList<String> runArray = new ArrayList<>();
             super.onPostExecute(s);
-            for(int i = 0; i <1; i++){
-                tempArray = new ArrayList<>(Arrays.asList(product));
-                adapter = new ArrayAdapter<String>(Main2Activity.this,android.R.layout.simple_list_item_1,s);
-                listview.setAdapter(adapter);
-                break;
-
+            for(int j = 0; j <3; j++){
+                product= s.get(j);
+                allproducts.add(product);
             }
         }
 
@@ -163,15 +168,11 @@ public class Main2Activity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<String> s) {
             ArrayAdapter<String> adapter = null;
-            String product = null;
-            ArrayList<String> tempArray;
+            String product;
             super.onPostExecute(s);
-            for(int i = 0; i <1; i++){
-                tempArray = new ArrayList<>(Arrays.asList(product));
-                adapter = new ArrayAdapter<String>(Main2Activity.this,android.R.layout.simple_list_item_1,s);
-                listview.setAdapter(adapter);
-                break;
-
+            for(int j = 0; j <3; j++){
+                product= s.get(j);
+                allproducts.add(product);
             }
         }
 
@@ -394,13 +395,11 @@ public class Main2Activity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> s) {
             ArrayAdapter<String> adapter = null;
             String product = null;
-            ArrayList<String> tempArray;
+            ArrayList<String> runArray = new ArrayList<>();
             super.onPostExecute(s);
-            for (int i = 0; i < 1; i++) {
-                tempArray = new ArrayList<>(Arrays.asList(product));
-                adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, s);
-                listview.setAdapter(adapter);
-                break;
+            for(int j = 0; j <3; j++){
+                product= s.get(j);
+                allproducts.add(product);
             }
         }
 
