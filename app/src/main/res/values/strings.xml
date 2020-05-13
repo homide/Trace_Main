@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Trace</string>
+    <string name="trace">Trace</string>
+    <string-array name="Categories">
+        <item> Select Category </item>
+        <item> Fashion </item>
+        <item> Groceries </item>
+        <item> Covid-19 </item>
+    </string-array>
+    <string name="searchText">Search here......</string>
+    <string name="searchButton">Search</string>
+    <string name="traceLogo">traceLogo</string>
+    <string name="Flipkart">Flipkart</string>
+    <string name="SnapDeal">SnapDeal</string>
+    <string name="Amazon">Amazon</string>
+    <string name="PaytmMall">PaytmMall</string>
+    <string name="imageSampleScroll">iamgeSampleScroll</string>
+</resources>
