@@ -416,6 +416,7 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
+            //this is just a check for git
             try {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
