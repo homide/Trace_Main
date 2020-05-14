@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textview = (TextView) findViewById(R.id.searchText);
+        textview = (TextView) findViewById(R.id.searchText1);
         searchButton = (Button) findViewById(R.id.btnSearch1);
 
 //        View.OnClickListener sear = new View.OnClickListener() {

@@ -8,18 +8,18 @@
     tools:context=".Main2Activity">
 
     <EditText
-        android:id="@+id/btnClick2"
+        android:id="@+id/searchText2"
         android:layout_width="262dp"
         android:layout_height="53dp"
         android:autofillHints=""
         android:background="@drawable/custom_search_bar"
+        android:drawableStart="@drawable/ic_action_search"
+        android:drawableLeft="@drawable/ic_action_search"
         android:ems="10"
         android:hint="@string/searchText"
-        android:drawableLeft="@drawable/ic_action_search"
-        android:drawableStart="@drawable/ic_action_search"
         android:inputType="textPersonName"
         android:textColorLink="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toStartOf="@+id/btnSearch2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -34,31 +34,18 @@
         android:onClick="btnClick2"
         android:text="@string/searchButton"
         android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
-        android:id="@+id/scrollView"
-        android:layout_width="0dp"
-        android:layout_height="730dp"
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="409dp"
+        android:layout_height="727dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.992">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <ListView
-                android:id="@+id/listView"
-                android:layout_width="match_parent"
-                android:layout_height="684dp" />
-        </LinearLayout>
-    </ScrollView>
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

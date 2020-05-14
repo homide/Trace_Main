@@ -44,7 +44,7 @@ public class Main2Activity extends AppCompatActivity {
 
         listview = (ListView) findViewById(R.id.listView);
         button2 = (Button) findViewById(R.id.btnSearch2);
-        usersearch = (EditText) findViewById(R.id.btnClick2);
+        usersearch = (EditText) findViewById(R.id.searchText2);
 
 
 

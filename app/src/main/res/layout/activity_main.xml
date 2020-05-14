@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/searchText"
+        android:id="@+id/searchText1"
         android:layout_width="365dp"
         android:layout_height="45dp"
         android:layout_marginTop="52dp"
@@ -49,7 +49,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchText"
+        app:layout_constraintTop_toBottomOf="@+id/searchText1"
         app:layout_constraintVertical_bias="0.27" />
 
     <ImageButton
