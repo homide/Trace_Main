@@ -8,7 +8,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,9 +25,30 @@ import java.util.Arrays;
 public class Main2Activity extends AppCompatActivity {
 
     public ListView listview;
-    public Button button1, button2;
+    public Button button2;
     public EditText usersearch;
+    public String search;
     ArrayList<String> allproducts = new ArrayList<String>();
+
+    public void classcall(){
+        for(int i = 0; i<5; i++){
+            switch (i){
+                case 1:
+                    Flipkart flip = new Flipkart();
+                    flip.execute("https://www.flipkart.com/search?q=" + search + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
+                    Snapdeal snap = new Snapdeal();
+                    snap.execute("https://www.snapdeal.com/search?keyword=" + search + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
+                    Paytm pyt = new Paytm();
+                    pyt.execute("https://www.paytmmall.com/shop/search?q=" + search + "&from=organic&child_site_id=6");
+                    break;
+
+            }
+        }
+    }
+    public void adaptormethod(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1,allproducts);
+        listview.setAdapter(adapter);
+    }
 
 
     public void btnClick2(View view) {
@@ -39,63 +59,24 @@ public class Main2Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
-
         Intent intent = getIntent();
         final String input1 = intent.getStringExtra(MainActivity.EXTRA_TEXT);
-
-        TextView resultText = (TextView) findViewById(R.id.resultText);
-
-        resultText.setText("Showing Results for: " + input1);
-
+        this.search = input1;
         listview = (ListView) findViewById(R.id.listView);
-        button1 = (Button) findViewById(R.id.btnSearch1);
         button2 = (Button) findViewById(R.id.btnSearch2);
         usersearch = (EditText) findViewById(R.id.searchText2);
+        classcall();
+        adaptormethod();
 
 
 //      Activity 1 input variable name = "input1"
 
-
-
-        View.OnClickListener view = new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                for(int i = 0; i<5; i++){
-                    switch (i){
-                        case 1:
-                            Flipkart flip = new Flipkart();
-                            flip.execute("https://www.flipkart.com/search?q=" + input1 + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
-                            break;
-
-//                        case 2:
-//                            Snapdeal snap = new Snapdeal();
-//                            snap.execute("https://www.snapdeal.com/search?keyword=" + usersearch.getText() + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
-//                            break;
-//
-//                        case 3:
-//                            Paytm pyt = new Paytm();
-//                            pyt.execute("https://www.paytmmall.com/shop/search?q=" + usersearch.getText() + "&from=organic&child_site_id=6");
-//                            break;
-                        case 4:
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts);
-                            listview.setAdapter(adapter);
-                            break;
-
-                    }
-                }
-
-            }
-        };
-
-//        button1.setOnClickListener(view);
-        button2.setOnClickListener(view);
     }
+
     private class Snapdeal extends AsyncTask<String, Void, ArrayList<String>> {
         @Override
         protected void onPostExecute(ArrayList<String> s) {
-            ArrayAdapter<String> adapter = null;
-            String product = null;
-            ArrayList<String> runArray = new ArrayList<>();
+            String product;
             super.onPostExecute(s);
             for(int j = 0; j <5; j++){
                 product= s.get(j);
@@ -185,7 +166,6 @@ public class Main2Activity extends AppCompatActivity {
         protected ArrayList<String> doInBackground(String... strings) {
             try{
                 Document doc = Jsoup.connect(strings[0]).get();
-                //col-xs-6  favDp product-tuple-listing js-tuple
                 Elements links = doc.getElementsByClass("_3O0U0u");
                 Elements links1 = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
@@ -245,7 +225,6 @@ public class Main2Activity extends AppCompatActivity {
 
                         }
                     }
-                    break;
                 }
 
                 for(Element testlink2 : links1){
@@ -304,7 +283,6 @@ public class Main2Activity extends AppCompatActivity {
                             }
                         }
                     }
-                    break;
                 }
                 return mainlist;
             } catch (Exception e){
@@ -410,8 +388,6 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
-            //this is just a check for git
-            //one more test comment-3
             try {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
