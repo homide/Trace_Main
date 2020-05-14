@@ -16,10 +16,6 @@ public class MainActivity extends AppCompatActivity {
     public TextView textview;
     public Button searchButton;
 
-// kuch bhi
-    // kush bhi 2
-    //hello my name is kanishk chauhan
-    // hello
 
     public void btnClick1(View view) {
         Toast.makeText(this, "Searching.....", Toast.LENGTH_SHORT).show();

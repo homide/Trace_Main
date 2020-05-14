@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.jsoup.Jsoup;
@@ -27,7 +28,6 @@ public class Main2Activity extends AppCompatActivity {
     public ListView listview;
     public Button button2;
     public EditText usersearch;
-    public String searchmain;
     ArrayList<String> allproducts = new ArrayList<String>();
 
 
@@ -48,23 +48,20 @@ public class Main2Activity extends AppCompatActivity {
 
 
 
-
-
-
         View.OnClickListener view = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 for(int i = 0; i<5; i++){
                     switch (i){
                         case 1:
-//                            Flipkart flip = new Flipkart();
-//                            flip.execute("https://www.flipkart.com/search?q=" +usersearch.getText()+ "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
-//                            break;
+                            Flipkart flip = new Flipkart();
+                            flip.execute("https://www.flipkart.com/search?q=" +usersearch.getText()+ "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
+                            break;
 
-//                        case 2:
-//                            Snapdeal snap = new Snapdeal();
-//                            snap.execute("https://www.snapdeal.com/search?keyword=" + usersearch.getText() + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
-//                            break;
+                        case 2:
+                            Snapdeal snap = new Snapdeal();
+                            snap.execute("https://www.snapdeal.com/search?keyword=" + usersearch.getText() + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
+                            break;
 
                         case 3:
                             Paytm pyt = new Paytm();
@@ -92,7 +89,7 @@ public class Main2Activity extends AppCompatActivity {
             String product = null;
             ArrayList<String> runArray = new ArrayList<>();
             super.onPostExecute(s);
-            for(int j = 0; j <3; j++){
+            for(int j = 0; j <5; j++){
                 product= s.get(j);
                 allproducts.add(product);
             }
@@ -170,7 +167,7 @@ public class Main2Activity extends AppCompatActivity {
             ArrayAdapter<String> adapter = null;
             String product;
             super.onPostExecute(s);
-            for(int j = 0; j <3; j++){
+            for(int j = 0; j <5; j++){
                 product= s.get(j);
                 allproducts.add(product);
             }
@@ -397,7 +394,7 @@ public class Main2Activity extends AppCompatActivity {
             String product = null;
             ArrayList<String> runArray = new ArrayList<>();
             super.onPostExecute(s);
-            for(int j = 0; j <3; j++){
+            for(int j = 0; j <5; j++){
                 product= s.get(j);
                 allproducts.add(product);
             }
@@ -466,5 +463,41 @@ public class Main2Activity extends AppCompatActivity {
                 return exception;
             }
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
     }
 }
