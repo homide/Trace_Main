@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,13 +14,21 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+    public  static  final String EXTRA_TEXT = "com.kush.naya.EXTRA_TEXT";
+
     public TextView textview;
     public Button searchButton;
 
 
     public void btnClick1(View view) {
+
+        EditText searchText1 = (EditText) findViewById(R.id.searchText1);
+        String searchTextData1 = searchText1.getText().toString();
+
         Toast.makeText(this, "Searching.....", Toast.LENGTH_SHORT).show();
         Intent intent = new Intent(this, Main2Activity.class);
+        intent.putExtra(EXTRA_TEXT, searchTextData1);
+
         startActivity(intent);
     }
 

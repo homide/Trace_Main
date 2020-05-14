@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -24,9 +25,8 @@ import java.util.Arrays;
 
 public class Main2Activity extends AppCompatActivity {
 
-
     public ListView listview;
-    public Button button2;
+    public Button button1, button2;
     public EditText usersearch;
     ArrayList<String> allproducts = new ArrayList<String>();
 
@@ -41,10 +41,19 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
 
         Intent intent = getIntent();
+        final String input1 = intent.getStringExtra(MainActivity.EXTRA_TEXT);
+
+        TextView resultText = (TextView) findViewById(R.id.resultText);
+
+        resultText.setText("Showing Results for: " + input1);
 
         listview = (ListView) findViewById(R.id.listView);
+        button1 = (Button) findViewById(R.id.btnSearch1);
         button2 = (Button) findViewById(R.id.btnSearch2);
         usersearch = (EditText) findViewById(R.id.searchText2);
+
+
+//      Activity 1 input variable name = "input1"
 
 
 
@@ -55,18 +64,18 @@ public class Main2Activity extends AppCompatActivity {
                     switch (i){
                         case 1:
                             Flipkart flip = new Flipkart();
-                            flip.execute("https://www.flipkart.com/search?q=" +usersearch.getText()+ "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
+                            flip.execute("https://www.flipkart.com/search?q=" + input1 + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
                             break;
 
-                        case 2:
-                            Snapdeal snap = new Snapdeal();
-                            snap.execute("https://www.snapdeal.com/search?keyword=" + usersearch.getText() + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
-                            break;
-
-                        case 3:
-                            Paytm pyt = new Paytm();
-                            pyt.execute("https://www.paytmmall.com/shop/search?q=" + usersearch.getText() + "&from=organic&child_site_id=6");
-                            break;
+//                        case 2:
+//                            Snapdeal snap = new Snapdeal();
+//                            snap.execute("https://www.snapdeal.com/search?keyword=" + usersearch.getText() + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
+//                            break;
+//
+//                        case 3:
+//                            Paytm pyt = new Paytm();
+//                            pyt.execute("https://www.paytmmall.com/shop/search?q=" + usersearch.getText() + "&from=organic&child_site_id=6");
+//                            break;
                         case 4:
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts);
                             listview.setAdapter(adapter);
@@ -78,9 +87,8 @@ public class Main2Activity extends AppCompatActivity {
             }
         };
 
+//        button1.setOnClickListener(view);
         button2.setOnClickListener(view);
-
-
     }
     private class Snapdeal extends AsyncTask<String, Void, ArrayList<String>> {
         @Override
