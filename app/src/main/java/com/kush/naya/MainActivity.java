@@ -18,18 +18,22 @@ public class MainActivity extends AppCompatActivity {
 
     public TextView textview;
     public Button searchButton;
+    public TextView errortext;
 
 
     public void btnClick1(View view) {
 
         EditText searchText1 = (EditText) findViewById(R.id.searchText1);
         String searchTextData1 = searchText1.getText().toString();
-
-        Toast.makeText(this, "Searching.....", Toast.LENGTH_SHORT).show();
-        Intent intent = new Intent(this, Main2Activity.class);
-        intent.putExtra(EXTRA_TEXT, searchTextData1);
-
-        startActivity(intent);
+        if (searchTextData1.length() <= 0) {
+            Toast.makeText(MainActivity.this, "Please add something to search.", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(this, "Searching.....", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, Main2Activity.class);
+            intent.putExtra(EXTRA_TEXT, searchTextData1);
+            startActivity(intent);
+        }
     }
 
     public Spinner spinnerCat;
