@@ -42,9 +42,20 @@ public class Main2Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
         Intent intent = getIntent();
-        final String input1 = intent.getStringExtra(MainActivity.EXTRA_TEXT);
-        this.search = input1;
+        listview = null;
+        Bundle args = intent.getBundleExtra("BUNDLE");
+        ArrayList<String> temparraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
         listview = (ListView) findViewById(R.id.listView);
+
+        if(temparraylist.isEmpty() != true){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1,temparraylist);
+            listview.setAdapter(adapter);
+        }
+
+
+        button2 = (Button) findViewById(R.id.btnSearch2);
+        usersearch = (EditText) findViewById(R.id.searchText2);
+
 
         for(int i = 0; i<5; i++){
             switch (i){
@@ -61,8 +72,11 @@ public class Main2Activity extends AppCompatActivity {
             }
         }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1,allproducts);
-        listview.setAdapter(adapter);
+        if(allproducts.isEmpty() != true){
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1,allproducts);
+            listview.setAdapter(adapter);
+        }
+
         button2 = (Button) findViewById(R.id.btnSearch2);
         usersearch = (EditText) findViewById(R.id.searchText2);
 

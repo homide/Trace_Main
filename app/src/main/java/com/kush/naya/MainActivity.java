@@ -3,6 +3,7 @@ package com.kush.naya;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -20,11 +21,11 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    public  static  final String EXTRA_TEXT = "com.kush.naya.EXTRA_TEXT";
 
     public ListView listview;
     public EditText searchbar;
@@ -66,9 +67,16 @@ public class MainActivity extends AppCompatActivity {
 
                         }
                     }
-                    Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-//                    intent.putExtra(EXTRA_TEXT, searchTextData1);
-                    startActivity(intent);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                            Bundle args = new Bundle();
+                            args.putSerializable("ARRAYLIST",(Serializable)allproducts);
+                            intent.putExtra("BUNDLE",args);
+                            startActivity(intent);
+                        }
+                    }, 6000);
                 }
             }
         });
@@ -101,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             ArrayAdapter<String> adapter = null;
             String product;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
                 allproducts.add(product);
             }
@@ -115,6 +123,7 @@ public class MainActivity extends AppCompatActivity {
                 Elements links = doc.getElementsByClass("_3O0U0u");
                 Elements links1 = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
+                mainlist.add("                     FLIPKART                     ");
 
                 for (Element testlink1 : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
@@ -248,7 +257,7 @@ public class MainActivity extends AppCompatActivity {
             String product;
             String urlstore;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
                 allproducts.add(product);
             }
@@ -274,6 +283,7 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
+                mainlist.add("               SNAPDEAL               ");
 
 
                 for (Element link : links) {
@@ -341,7 +351,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> s) {
             String product;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
                 allproducts.add(product);
             }
@@ -353,6 +363,7 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
+                mainlist.add("               PAYTM               ");
 
                 for (Element link : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
