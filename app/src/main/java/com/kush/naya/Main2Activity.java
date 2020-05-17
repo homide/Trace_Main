@@ -104,6 +104,7 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3O0U0u");
                 Elements links1 = doc.getElementsByClass("_3liAhj");
+                Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 ArrayList<String> mainlist = new ArrayList<String>();
 
                 for (Element testlink1 : links) {
@@ -219,6 +220,69 @@ public class Main2Activity extends AppCompatActivity {
                             }
                         }
                     }
+                }
+
+                for (Element fashion : fashions) {
+
+                    Elements fashiontitle = fashion.getElementsByClass("_2mylT6");
+
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String permanent1 = null;
+
+                    if (fashiontitle.size() > 0) {
+                        for (Element fash : fashions) {
+
+                            Elements flink = fash.getElementsByTag("a");
+
+                            Elements fpricebefore = fash.getElementsByClass("_3auQ3N");
+
+
+                            Elements fpriceafter = fash.getElementsByClass("_1vC4OE");
+
+
+                            Elements fdiscount = fash.getElementsByClass("VGWI6T");
+
+
+                            for (Element ftitle : fashiontitle) {
+                                temp1 = "Title: " + ftitle.text();
+
+                            }
+
+                            //product original price loop
+                            for (Element fproductpricebefore : fpricebefore) {
+                                temp2 = "Price before: " + fproductpricebefore.text();
+                            }
+
+                            //product discounted price loop
+                            for (Element fproductproceafter : fpriceafter) {
+                                temp3 = "Discounted price: " + fproductproceafter.text();
+
+                            }
+
+                            //discount in number loop
+                            for (Element fproductdiscount : fdiscount) {
+                                temp4 = "Discount: " + fproductdiscount.text();
+
+                            }
+
+                            ArrayList<String> linkArray = new ArrayList<String>();
+                            for (Element felementLink : flink) {
+                                String fMainLink = felementLink.attr("href");
+                                linkArray.add(fMainLink);
+                            }
+                            for (int i = 0; i < (linkArray.size()); i++) {
+                                temp5 = "https://www.flipkart.com" + linkArray.get(0);
+                            }
+                            permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                            mainlist.add(permanent1);
+
+
+
+
+                        }
+
+                    }
+
                 }
                 return mainlist;
             } catch (Exception e) {
