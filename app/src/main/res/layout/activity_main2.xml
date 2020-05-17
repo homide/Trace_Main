@@ -9,8 +9,8 @@
 
     <EditText
         android:id="@+id/searchText2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="236dp"
+        android:layout_height="35dp"
         android:layout_marginTop="4dp"
         android:autofillHints=""
         android:background="@drawable/custom_search_bar"
@@ -29,8 +29,8 @@
 
     <Button
         android:id="@+id/btnSearch2"
-        android:layout_width="90dp"
-        android:layout_height="38dp"
+        android:layout_width="72dp"
+        android:layout_height="34dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
