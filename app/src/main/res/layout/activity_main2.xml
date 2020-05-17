@@ -44,11 +44,10 @@
         app:layout_constraintStart_toEndOf="@+id/searchText2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.086" />
-
     <ListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
-        android:layout_height="620dp"
+        android:layout_height="660dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
