@@ -1,9 +1,13 @@
 package com.kush.naya;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,12 +34,6 @@ public class Main2Activity extends AppCompatActivity {
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
 
-    public void btnClick2(View view) {
-        Toast.makeText(this, "Searching....", Toast.LENGTH_SHORT).show();
-        if(usersearch.getText().length() <=0){
-            Toast.makeText(this, "Please add something to search.", Toast.LENGTH_SHORT).show();
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,11 +43,21 @@ public class Main2Activity extends AppCompatActivity {
         listview = null;
         Bundle args = intent.getBundleExtra("BUNDLE");
         ArrayList<String> temparraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
+        final ArrayList<String> tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
         listview = (ListView) findViewById(R.id.listView);
 
-        if(temparraylist.isEmpty() != true){
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1,temparraylist);
+        if (temparraylist.isEmpty() != true) {
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, temparraylist);
             listview.setAdapter(adapter);
+            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String link = tempurllist.get(position-1);
+                    Intent intent = new Intent((Intent.ACTION_VIEW));
+                    intent.setData(Uri.parse(link));
+                    startActivity(intent);
+                }
+            });
         }
 
 
@@ -57,44 +65,93 @@ public class Main2Activity extends AppCompatActivity {
         usersearch = (EditText) findViewById(R.id.searchText2);
 
 
-        for(int i = 0; i<5; i++){
-            switch (i){
-                case 1:
-                    Flipkart flip = new Flipkart();
-                    flip.execute("https://www.flipkart.com/search?q=" + search + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
-                    Paytm pyt = new Paytm();
-                    pyt.execute("https://www.paytmmall.com/shop/search?q=" + search + "&from=organic&child_site_id=6");
-                    Snapdeal snap = new Snapdeal();
-                    snap.execute("https://www.snapdeal.com/search?keyword=" + search + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
-                    break;
-////                   amz.execute("https://www.amazon.in/s?k=" + search + "&ref=nb_sb_noss_2");
 
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (usersearch.getText().length() <= 0) {
+                    Toast.makeText(Main2Activity.this, "Please add something to search.", Toast.LENGTH_SHORT).show();
+                } else {
+                    final ProgressDialog pd = new ProgressDialog(Main2Activity.this);
+                    pd.setMessage("Searching websites...");
+                    pd.show();
+                    if(allproducts.size() > 0){
+                        while(allproducts.size() > 0){
+                            int i = 0;
+                            allproducts.remove(i);
+                        }
+                    }
+                    if(producturl.size() >0){
+                        while(producturl.size() >0){
+                            int i = 0;
+                            producturl.remove(i);
+                        }
+                    }
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            pd.dismiss();
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts);
+                            listview.setAdapter(adapter);
+                        }
+                    }, 6000);
+
+                    for (int i = 0; i < 5; i++) {
+                        switch (i) {
+                            case 1:
+                                Flipkart flip = new Flipkart();
+                                flip.execute("https://www.flipkart.com/search?q=" + usersearch.getText() + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
+                                Paytm pyt = new Paytm();
+                                pyt.execute("https://www.paytmmall.com/shop/search?q=" + usersearch.getText() + "&from=organic&child_site_id=6");
+                                Snapdeal snap = new Snapdeal();
+                                snap.execute("https://www.snapdeal.com/search?keyword=" + usersearch.getText() + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
+//                                Amazon amz = new Amazon();
+//                                amz.execute("https://www.amazon.in/s?k=" + search + "&ref=nb_sb_noss_2");
+                                break;
+                        }
+                    }
+                    listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String link = producturl.get(position-1);
+                            Intent intent = new Intent((Intent.ACTION_VIEW));
+                            intent.setData(Uri.parse(link));
+                            startActivity(intent);
+                        }
+                    });
+                }
             }
-        }
-
-        if(allproducts.isEmpty() != true){
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1,allproducts);
-            listview.setAdapter(adapter);
-        }
-
-        button2 = (Button) findViewById(R.id.btnSearch2);
-        usersearch = (EditText) findViewById(R.id.searchText2);
+        });
 
 
     }
 
     private class Flipkart extends AsyncTask<String, Void, ArrayList<String>> {
-
+        ArrayList<String> tempurlstore = new ArrayList<>();
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
             ArrayAdapter<String> adapter = null;
             String product;
+            String urlstore;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
+                urlstore = tempurlstore.get(j);
                 allproducts.add(product);
+                producturl.add(urlstore);
             }
+
+//            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//                @Override
+//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    String link = tempurlstore.get(position-1);
+//                    Intent intent = new Intent((Intent.ACTION_VIEW));
+//                    intent.setData(Uri.parse(link));
+//                    startActivity(intent);
+//                }
+//            });
 
         }
 
@@ -106,6 +163,7 @@ public class Main2Activity extends AppCompatActivity {
                 Elements links1 = doc.getElementsByClass("_3liAhj");
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 ArrayList<String> mainlist = new ArrayList<String>();
+                mainlist.add("                              FLIPKART                              ");
 
                 for (Element testlink1 : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
@@ -159,7 +217,7 @@ public class Main2Activity extends AppCompatActivity {
                             }
                             permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
-
+                            tempurlstore.add(temp5);
                         }
                     }
                 }
@@ -217,6 +275,7 @@ public class Main2Activity extends AppCompatActivity {
                                 }
                                 permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                                 mainlist.add(permanent1);
+                                tempurlstore.add(temp5);
                             }
                         }
                     }
@@ -275,7 +334,7 @@ public class Main2Activity extends AppCompatActivity {
                             }
                             permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
-
+                            tempurlstore.add(temp5);
                         }
 
                     }
@@ -292,31 +351,20 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private class Snapdeal extends AsyncTask<String, Void, ArrayList<String>> {
-
+        ArrayList<String> tempurlstore = new ArrayList<>();
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
             String product;
             String urlstore;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
+                urlstore = tempurlstore.get(j);
                 allproducts.add(product);
+                producturl.add(urlstore);
             }
 
-//            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    String[] tem = new String[5];
-//                    Intent intent = null;
-//                    for(int i = 0; i<5 ; i++){
-//                        tem[i] = tempurlstore.get(i);
-//                        intent.setData(Uri.parse(tem[i]));
-//                    }
-//                    intent = new Intent((Intent.ACTION_VIEW));
-//                    startActivity(intent);
-//                }
-//            });
         }
 
         @Override
@@ -325,6 +373,7 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
+                mainlist.add("               SNAPDEAL               ");
 
 
                 for (Element link : links) {
@@ -373,6 +422,7 @@ public class Main2Activity extends AppCompatActivity {
                     }
                     permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                     mainlist.add(permanent1);
+                    tempurlstore.add(temp5);
 
                 }
                 return mainlist;
@@ -386,15 +436,18 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public class Paytm extends AsyncTask<String, Void, ArrayList<String>> {
-
+        ArrayList<String> tempurlstore = new ArrayList<>();
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
             String product;
+            String urlstore;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
+                urlstore = tempurlstore.get(j);
                 allproducts.add(product);
+                producturl.add(urlstore);
             }
         }
 
@@ -404,6 +457,7 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
+                mainlist.add("               PAYTM               ");
 
                 for (Element link : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
@@ -450,6 +504,7 @@ public class Main2Activity extends AppCompatActivity {
                     }
                     permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                     mainlist.add(permanent1);
+                    tempurlstore.add(temp5);
 
                 }
                 return mainlist;
@@ -461,6 +516,178 @@ public class Main2Activity extends AppCompatActivity {
             }
         }
     }
+//    private class Amazon extends AsyncTask<String, Void, ArrayList<String>> {
+//        ArrayList<String> tempurlstore = new ArrayList<String>();
+//        @Override
+//        protected void onPostExecute(ArrayList<String> s) {
+//            String product;
+//            String urlstore;
+//            super.onPostExecute(s);
+//            for(int j = 0; j <5; j++){
+//                product= s.get(j);
+//                allproducts.add(product);
+//            }
+////            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+////                @Override
+////                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+////                    String[] tem = new String[5];
+////                    Intent intent = null;
+////                    for(int i = 0; i<5 ; i++){
+////                        tem[i] = tempurlstore.get(i);
+////                        intent.setData(Uri.parse(tem[i]));
+////                    }
+////                    intent = new Intent((Intent.ACTION_VIEW));
+////                    startActivity(intent);
+////                }
+////            });
+//        }
+//        @Override
+//        protected ArrayList<String> doInBackground(String... strings) {
+//            try {
+//                Document doc = Jsoup.connect(strings[0]).get();
+//                Elements links = doc.getElementsByClass("a-section a-spacing-medium"); //vertical results
+//                Elements links1 = doc.getElementsByClass("a-section a-spacing-medium a-text-center"); //grid results
+//                ArrayList<String> mainlist = new ArrayList<String>();
+//
+//
+//                for (Element testlink1 : links) {
+//                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+//                    String permanent1 = null;
+//
+//                    Elements eltitle1 = testlink1.getElementsByClass("a-size-medium a-color-base a-text-normal");
+//
+//                    if (eltitle1.size() > 0) {
+//                        for (Element link : links) {
+//
+//                            Elements elLink = link.getElementsByTag("a");
+//
+//                            Elements elpricebefore = link.getElementsByClass("a-price a-text-price");
+//
+//
+//                            Elements elpriceafter = link.getElementsByClass("a-price");
+//
+//
+//                            Elements discount = link.getElementsByClass("a-letter-space");
+//
+//                            Elements image = link.select("img");
+//
+//
+//                            for (Element titleOfProduct : eltitle1) {
+//                                temp1 ="Title: " + titleOfProduct.text();
+//                            }
+//                            //for image
+////                            for (Element img23 : image) {
+////
+////                            }
+//
+//                            //product original price loop
+//                            for (Element priceOfProductBefore : elpricebefore) {
+//                                temp2 = "Price before: " + priceOfProductBefore.text();
+//                            }
+//
+//                            //product discounted price loop
+//                            for (Element priceOfProductAfter : elpriceafter) {
+//                                temp3 ="Discounted price: " + priceOfProductAfter.text();
+//                                break;
+//                            }
+//
+//                            //discount in number loop
+//                            for (Element productdiscount : discount) {
+//                                temp4 ="Discount: " +  productdiscount.text();
+//                                break;
+//                            }
+//                            ArrayList<String> linkArray = new ArrayList<String>();
+//                            for (Element elementLink : elLink) {
+//                                String MainLink = elementLink.attr("href");
+//                                linkArray.add(MainLink);
+//                                break;
+//                            }
+//                            for (int j = 0; j < 1; j++) {
+//                                temp5 = linkArray.get(0);
+//                            }
+//                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
+//                            mainlist.add(permanent1);
+//                            tempurlstore.add(temp5);
+//
+//                        }return mainlist;
+//                    }
+//                    break;
+//                }
+//
+//                for (Element testlink2 : links1) {
+//
+//                    Elements Testrun = testlink2.getElementsByClass("a-link-normal a-text-normal");
+//                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+//                    String permanent1 = null;
+//
+//                    if (Testrun.size() > 0) {
+//                        for (Element link1 : links1) {
+//                            Elements elLink1 = link1.getElementsByTag("a");
+//
+//                            Elements eltitle2 = link1.getElementsByClass("a-size-base-plus a-color-base a-text-normal");
+//
+//
+//                            Elements elpricebefore1 = link1.getElementsByClass("a-price a-text-price");
+//
+//
+//                            Elements elpriceafter1 = link1.getElementsByClass("a-price-whole");
+//
+//                            Elements discount1 = link1.getElementsByClass("a-letter-space");
+//
+//                            Elements img1 = link1.select("img");
+//
+//
+//                            //product title loop
+//
+//                            for (Element titleOfProduct : eltitle2) {
+//                                temp1 ="Title: " + titleOfProduct.text();
+//                            }
+//                            //for image
+////                            for (Element img23 : image) {
+////
+////                            }
+//
+//                            //product original price loop
+//                            for (Element priceOfProductBefore : elpricebefore1) {
+//                                temp2 = "Price before: " + priceOfProductBefore.text();
+//                            }
+//
+//                            //product discounted price loop
+//                            for (Element priceOfProductAfter : elpriceafter1) {
+//                                temp3 ="Discounted price: " + priceOfProductAfter.text();
+//                                break;
+//                            }
+//
+//                            //discount in number loop
+//                            for (Element productdiscount : discount1) {
+//                                temp4 ="Discount: " +  productdiscount.text();
+//                                break;
+//                            }
+//                            ArrayList<String> linkArray = new ArrayList<String>();
+//                            for (Element elementLink : elLink1) {
+//                                String MainLink = elementLink.attr("href");
+//                                linkArray.add(MainLink);
+//                                break;
+//                            }
+//                            for (int j = 0; j < 1; j++) {
+//                                temp5 = linkArray.get(0);
+//                            }
+//                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
+//                            mainlist.add(permanent1);
+//                            tempurlstore.add(temp5);
+//
+//                        }
+//                    }
+//                    break;
+//                } return mainlist;
+//            } catch (Exception e) {
+//                ArrayList<String> exception = new ArrayList<String>();
+//                String ex = e.toString();
+//                exception.add(ex);
+//                return exception;
+//            }
+//        }
+//    }
 
 
     @Override
