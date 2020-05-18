@@ -3,7 +3,6 @@ package com.kush.naya;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.service.autofill.BatchUpdates;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -276,9 +275,6 @@ public class Main2Activity extends AppCompatActivity {
                             }
                             permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
-
-
-
 
                         }
 
