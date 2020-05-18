@@ -224,7 +224,7 @@ public class Main2Activity extends AppCompatActivity {
                 }
 
                 for (Element fashion : fashions) {
-                                #BatchUpdates
+                    //BatchUpdates
                     Elements fashiontitle = fashion.getElementsByClass("_2mylT6");
 
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
