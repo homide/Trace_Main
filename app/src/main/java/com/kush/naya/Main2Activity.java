@@ -3,6 +3,7 @@ package com.kush.naya;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.service.autofill.BatchUpdates;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -223,7 +224,7 @@ public class Main2Activity extends AppCompatActivity {
                 }
 
                 for (Element fashion : fashions) {
-
+                                #BatchUpdates
                     Elements fashiontitle = fashion.getElementsByClass("_2mylT6");
 
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
