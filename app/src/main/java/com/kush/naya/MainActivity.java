@@ -2,16 +2,15 @@ package com.kush.naya;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,6 +35,30 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
 //    public Spinner spinnerCat;
+
+    public void flipkartButton(View view){
+        Intent intent = new Intent((Intent.ACTION_VIEW));
+        intent.setData(Uri.parse("https://www.flipkart.com"));
+        startActivity(intent);
+    }
+
+    public void amazonButton(View view){
+        Intent intent = new Intent((Intent.ACTION_VIEW));
+        intent.setData(Uri.parse("https://www.amazon.in"));
+        startActivity(intent);
+    }
+
+    public void snapdealButton(View view){
+        Intent intent = new Intent((Intent.ACTION_VIEW));
+        intent.setData(Uri.parse("https://www.snapdeal.com"));
+        startActivity(intent);
+    }
+
+    public void paytmButton(View view){
+        Intent intent = new Intent((Intent.ACTION_VIEW));
+        intent.setData(Uri.parse("https://www.paytmmall.com"));
+        startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
