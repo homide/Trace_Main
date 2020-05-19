@@ -51,25 +51,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSearch1"
-        app:layout_constraintVertical_bias="0.705"
+        app:layout_constraintVertical_bias="0.887"
         app:srcCompat="@drawable/amazon_logo" />
-
-    <ImageButton
-        android:id="@+id/pytm_btn"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:adjustViewBounds="true"
-        android:contentDescription="@null"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.68"
-        app:layout_constraintStart_toEndOf="@+id/snap_btn"
-        app:layout_constraintTop_toBottomOf="@+id/btnSearch1"
-        app:layout_constraintVertical_bias="0.707"
-        app:srcCompat="@drawable/pytmll_logo" />
 
     <ImageButton
         android:id="@+id/flip_btn"
@@ -85,23 +68,52 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSearch1"
-        app:layout_constraintVertical_bias="0.707"
+        app:layout_constraintVertical_bias="0.887"
         app:srcCompat="@drawable/flipkart_logo" />
 
     <ImageButton
         android:id="@+id/snap_btn"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginEnd="128dp"
-        android:layout_marginRight="128dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginRight="120dp"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSearch1"
-        app:layout_constraintVertical_bias="0.705"
+        app:layout_constraintVertical_bias="0.887"
         app:srcCompat="@drawable/snapdeal_logo" />
+
+    <ImageButton
+        android:id="@+id/pytm_btn"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginRight="16dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@null"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.689"
+        app:layout_constraintStart_toEndOf="@+id/snap_btn"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch1"
+        app:layout_constraintVertical_bias="0.896"
+        app:srcCompat="@drawable/pytmll_logo" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/logo_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSearch1"
+        app:layout_constraintVertical_bias="0.656" />
 
     <ImageView
         android:id="@+id/imageView"
@@ -114,15 +126,5 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.52"
         app:srcCompat="@drawable/traceimage" />
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/logo_textView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSearch1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
