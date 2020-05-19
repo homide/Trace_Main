@@ -48,6 +48,12 @@ public class Main2Activity extends AppCompatActivity {
         ArrayList<String> temparraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
         final ArrayList<String> tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
         listview = (ListView) findViewById(R.id.listView);
+        Integer imageid[] = {
+                R.drawable.flipkart_logo_broad,
+                R.drawable.pytmll_logo_broad,
+                R.drawable.snapdeal_logo_broad,
+//                R.drawable.amazon_logo_broad,
+        };
 
 
         TextView resultText = (TextView) findViewById(R.id.resultText);
