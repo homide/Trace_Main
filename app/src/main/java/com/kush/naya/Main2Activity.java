@@ -43,10 +43,16 @@ public class Main2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_main2);
         Intent intent = getIntent();
         listview = null;
+        String input1 = intent.getStringExtra(MainActivity.EXTRA_TEXT);
         Bundle args = intent.getBundleExtra("BUNDLE");
         ArrayList<String> temparraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
         final ArrayList<String> tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
         listview = (ListView) findViewById(R.id.listView);
+
+
+        TextView resultText = (TextView) findViewById(R.id.resultText);
+        resultText.setText("Showing Results for: "+input1);
+
 
         if (temparraylist.isEmpty() != true) {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, temparraylist);

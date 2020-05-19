@@ -31,10 +31,11 @@ public class MainActivity extends AppCompatActivity {
     public ListView listview;
     public EditText searchbar;
     public Button searchButton;
+    public static final String EXTRA_TEXT = "com.kush.naya.EXTRA_TEXT";
     String searchtext;
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
-    public Spinner spinnerCat;
+//    public Spinner spinnerCat;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
                             args.putSerializable("ARRAYLIST",(Serializable)allproducts);
                             args.putSerializable("URLLINKS" , (Serializable) producturl);
                             intent.putExtra("BUNDLE",args);
+                            intent.putExtra(EXTRA_TEXT, searchtext);
                             startActivity(intent);
                         }
                     }, 6000);
@@ -87,21 +89,19 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        final String[]arrayCat=getResources().getStringArray(R.array.Categories);
-        spinnerCat=findViewById(R.id.spinnerCat);
-        spinnerCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(MainActivity.this, ""+arrayCat[position], Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//        final String[]arrayCat=getResources().getStringArray(R.array.Categories);
+//        spinnerCat=findViewById(R.id.spinnerCat);
+//        spinnerCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(MainActivity.this, ""+arrayCat[position], Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
     }
 
