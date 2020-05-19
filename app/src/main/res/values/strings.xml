@@ -15,4 +15,5 @@
     <string name="Amazon">Amazon</string>
     <string name="PaytmMall">PaytmMall</string>
     <string name="imageSampleScroll">iamgeSampleScroll</string>
+    <string name="logo_textView">Currently Searching On......</string>
 </resources>
