@@ -9,9 +9,9 @@
 
     <EditText
         android:id="@+id/searchText2"
-        android:layout_width="236dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="4dp"
+        android:layout_width="255dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="20dp"
         android:autofillHints=""
         android:background="@drawable/custom_search_bar"
         android:drawableStart="@drawable/ic_action_search"
@@ -24,34 +24,41 @@
         app:layout_constraintEnd_toStartOf="@+id/btnSearch2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.083" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnSearch2"
         android:layout_width="72dp"
-        android:layout_height="34dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginRight="24dp"
+        android:layout_height="45dp"
+        android:layout_marginBottom="20dp"
         android:background="@drawable/custom_button"
-        android:onClick="btnClick2"
         android:text="@string/searchButton"
         android:textColor="#FFFFFF"
         app:layout_constraintBottom_toTopOf="@+id/listView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/searchText2"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.086" />
+        app:layout_constraintTop_toTopOf="parent" />
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="wrap_content"
-        android:layout_height="660dp"
+        android:layout_height="750dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/resultText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="9dp"
+        app:layout_constraintBottom_toTopOf="@+id/listView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/searchText2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

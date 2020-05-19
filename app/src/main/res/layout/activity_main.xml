@@ -41,7 +41,6 @@
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:background="@drawable/custom_button"
-        android:onClick="btnClick1"
         android:text="@string/searchButton"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
