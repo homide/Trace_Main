@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 Elements links1 = doc.getElementsByClass("_3liAhj");
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("                              FLIPKART                              ");
+                mainlist.add("                     FLIPKART                              ");
 
                 for (Element testlink1 : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
