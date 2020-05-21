@@ -37,7 +37,7 @@ IDE
 ## Authors
 
 * **Kanishk Chauhan** - *Initial work and BackEnd* - [homide](https://github.com/homide)
-* **Kushagra Bansak** - *FrontEnd and GUI* - [VidrusDGamer](https://github.com/VirusDGamer)
+* **Kushagra Bansak** - *FrontEnd and GUI* - [VirusDGamer](https://github.com/VirusDGamer)
 * **Oarish Thacker** - *FrontEnd and GUI* - [hack1929](https://github.com/hack1929)
 * **Animesh Sinha** - *Initial work and BackEnd* - [deniedhash](https://github.com/deniedhash)
 
