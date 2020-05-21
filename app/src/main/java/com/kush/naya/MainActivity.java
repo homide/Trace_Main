@@ -559,6 +559,8 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements elLink = link.getElementsByTag("a");
 
+                            Elements eltitle2 = link.getElementsByClass("a-size-medium a-color-base a-text-normal");
+
                             Elements elpricebefore = link.getElementsByClass("a-price a-text-price");
 
 
@@ -570,7 +572,7 @@ public class MainActivity extends AppCompatActivity {
                             Elements image = link.select("img");
 
 
-                            for (Element titleOfProduct : eltitle1) {
+                            for (Element titleOfProduct : eltitle2) {
                                 temp1 ="Title: " + titleOfProduct.text();
                             }
                             //for image
@@ -596,7 +598,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element elementLink : elLink) {
-                                String MainLink = elementLink.attr("href");
+                                String MainLink = "https://www.amazon.in"+ elementLink.attr("href");
                                 linkArray.add(MainLink);
                                 break;
                             }
@@ -663,7 +665,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element elementLink : elLink1) {
-                                String MainLink = elementLink.attr("href");
+                                String MainLink = "https://www.amazon.in"+ elementLink.attr("href");
                                 linkArray.add(MainLink);
                                 break;
                             }

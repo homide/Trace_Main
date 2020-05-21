@@ -566,6 +566,8 @@ public class Main2Activity extends AppCompatActivity {
 
                             Elements elLink = link.getElementsByTag("a");
 
+                            Elements eltitle2 = link.getElementsByClass("a-size-medium a-color-base a-text-normal");
+
                             Elements elpricebefore = link.getElementsByClass("a-price a-text-price");
 
 
@@ -577,7 +579,7 @@ public class Main2Activity extends AppCompatActivity {
                             Elements image = link.select("img");
 
 
-                            for (Element titleOfProduct : eltitle1) {
+                            for (Element titleOfProduct : eltitle2) {
                                 temp1 ="Title: " + titleOfProduct.text();
                             }
                             //for image
@@ -603,12 +605,12 @@ public class Main2Activity extends AppCompatActivity {
                             }
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element elementLink : elLink) {
-                                String MainLink = elementLink.attr("href");
+                                String MainLink = "https://www.amazon.in" + elementLink.attr("href");
                                 linkArray.add(MainLink);
                                 break;
                             }
                             for (int j = 0; j < 1; j++) {
-                                temp5 = "https://www.amazon.in"+ linkArray.get(0);
+                                temp5 = linkArray.get(0);
                             }
                             permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n" +temp5 +"\n";
                             mainlist.add(permanent1);
@@ -670,12 +672,12 @@ public class Main2Activity extends AppCompatActivity {
                             }
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element elementLink : elLink1) {
-                                String MainLink = elementLink.attr("href");
+                                String MainLink = "https://www.amazon.in"+ elementLink.attr("href");
                                 linkArray.add(MainLink);
                                 break;
                             }
                             for (int j = 0; j < 1; j++) {
-                                temp5 = "https://www.amazon.in"+ linkArray.get(0);
+                                temp5 =linkArray.get(0);
                             }
                             permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n" +temp5 +"\n";
                             mainlist.add(permanent1);
