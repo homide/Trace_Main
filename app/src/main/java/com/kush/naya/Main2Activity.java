@@ -605,14 +605,14 @@ public class Main2Activity extends AppCompatActivity {
                             }
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element elementLink : elLink) {
-                                String MainLink = "https://www.amazon.in" + elementLink.attr("href");
+                                String MainLink = "https://www.amazon.in"+ elementLink.attr("href");
                                 linkArray.add(MainLink);
                                 break;
                             }
                             for (int j = 0; j < 1; j++) {
                                 temp5 = linkArray.get(0);
                             }
-                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n" +temp5 +"\n";
+                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
 
@@ -677,9 +677,9 @@ public class Main2Activity extends AppCompatActivity {
                                 break;
                             }
                             for (int j = 0; j < 1; j++) {
-                                temp5 =linkArray.get(0);
+                                temp5 = linkArray.get(0);
                             }
-                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n" +temp5 +"\n";
+                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
 
