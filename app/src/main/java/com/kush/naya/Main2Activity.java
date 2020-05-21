@@ -120,8 +120,8 @@ public class Main2Activity extends AppCompatActivity {
                                 pyt.execute("https://www.paytmmall.com/shop/search?q=" + usersearch.getText() + "&from=organic&child_site_id=6");
                                 Snapdeal snap = new Snapdeal();
                                 snap.execute("https://www.snapdeal.com/search?keyword=" + usersearch.getText() + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
-//                                Amazon amz = new Amazon();
-//                                amz.execute("https://www.amazon.in/s?k=" + search + "&ref=nb_sb_noss_2");
+                                Amazon amz = new Amazon();
+                                amz.execute("https://www.amazon.in/s?k=" + search + "&ref=nb_sb_noss_2");
                                 break;
                         }
                     }
@@ -538,23 +538,12 @@ public class Main2Activity extends AppCompatActivity {
             String product;
             String urlstore;
             super.onPostExecute(s);
-            for(int j = 0; j <5; j++){
-                product= s.get(j);
+            for(int j = 0; j <6; j++){
+                product = s.get(j);
+                urlstore = tempurlstore.get(j);
                 allproducts.add(product);
+                producturl.add(urlstore);
             }
-//            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    String[] tem = new String[5];
-//                    Intent intent = null;
-//                    for(int i = 0; i<5 ; i++){
-//                        tem[i] = tempurlstore.get(i);
-//                        intent.setData(Uri.parse(tem[i]));
-//                    }
-//                    intent = new Intent((Intent.ACTION_VIEW));
-//                    startActivity(intent);
-//                }
-//            });
         }
         @Override
         protected ArrayList<String> doInBackground(String... strings) {
@@ -563,6 +552,7 @@ public class Main2Activity extends AppCompatActivity {
                 Elements links = doc.getElementsByClass("a-section a-spacing-medium"); //vertical results
                 Elements links1 = doc.getElementsByClass("a-section a-spacing-medium a-text-center"); //grid results
                 ArrayList<String> mainlist = new ArrayList<String>();
+                mainlist.add("                  AMAZON                  ");
 
 
                 for (Element testlink1 : links) {
@@ -618,9 +608,9 @@ public class Main2Activity extends AppCompatActivity {
                                 break;
                             }
                             for (int j = 0; j < 1; j++) {
-                                temp5 = linkArray.get(0);
+                                temp5 = "https://www.amazon.in"+ linkArray.get(0);
                             }
-                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
+                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n" +temp5 +"\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
 
@@ -685,9 +675,9 @@ public class Main2Activity extends AppCompatActivity {
                                 break;
                             }
                             for (int j = 0; j < 1; j++) {
-                                temp5 = linkArray.get(0);
+                                temp5 = "https://www.amazon.in"+ linkArray.get(0);
                             }
-                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
+                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n" +temp5 +"\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
 
