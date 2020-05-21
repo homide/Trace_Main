@@ -9,7 +9,7 @@
 
     <EditText
         android:id="@+id/searchText1"
-        android:layout_width="365dp"
+        android:layout_width="350dp"
         android:layout_height="45dp"
         android:autofillHints=""
         android:background="@drawable/custom_search_bar"
