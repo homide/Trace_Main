@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra(EXTRA_TEXT, searchtext);
                             startActivity(intent);
                         }
-                    }, 4500);
+                    }, 8000);
                 }
             }
         });
@@ -582,12 +582,19 @@ public class MainActivity extends AppCompatActivity {
 
                             //product original price loop
                             for (Element priceOfProductBefore : elpricebefore) {
-                                temp2 = "Price before: " + priceOfProductBefore.text();
+                                String s1 = priceOfProductBefore.text();
+                                char[] a1 = s1.toCharArray();
+                                String new1 = null;
+
+                                for (int x = 0; x<(a1.length)/2; x++){
+                                    new1 = new1 + a1[x];
+                                }
+                                temp2 = "Price before: " + new1;
                             }
 
                             //product discounted price loop
                             for (Element priceOfProductAfter : elpriceafter) {
-                                temp3 ="Discounted price: " + priceOfProductAfter.text();
+                                temp3 ="Discounted price: ₹" + priceOfProductAfter.text();
                                 break;
                             }
 
@@ -649,12 +656,20 @@ public class MainActivity extends AppCompatActivity {
 
                             //product original price loop
                             for (Element priceOfProductBefore : elpricebefore1) {
-                                temp2 = "Price before: " + priceOfProductBefore.text();
+                                String s1 = priceOfProductBefore.text();
+                                char[] a1 = s1.toCharArray();
+                                String new1 = null;
+
+                                for (int x = 0; x<(a1.length)/2; x++){
+                                    new1 = new1 + a1[x];
+                                }
+                                temp2 = "Price before: " + new1;
+
                             }
 
                             //product discounted price loop
                             for (Element priceOfProductAfter : elpriceafter1) {
-                                temp3 ="Discounted price: " + priceOfProductAfter.text();
+                                temp3 ="Discounted price: ₹" + priceOfProductAfter.text();
                                 break;
                             }
 

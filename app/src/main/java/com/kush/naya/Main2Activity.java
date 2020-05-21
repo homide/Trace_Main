@@ -52,7 +52,7 @@ public class Main2Activity extends AppCompatActivity {
                 R.drawable.flipkart_logo_broad,
                 R.drawable.pytmll_logo_broad,
                 R.drawable.snapdeal_logo_broad,
-//                R.drawable.amazon_logo_broad,
+//              R.drawable.amazon_logo_broad,
         };
 
 
@@ -109,7 +109,7 @@ public class Main2Activity extends AppCompatActivity {
                             ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts);
                             listview.setAdapter(adapter);
                         }
-                    }, 6000);
+                    }, 8000);
 
                     for (int i = 0; i < 5; i++) {
                         switch (i) {
@@ -589,7 +589,14 @@ public class Main2Activity extends AppCompatActivity {
 
                             //product original price loop
                             for (Element priceOfProductBefore : elpricebefore) {
-                                temp2 = "Price before: " + priceOfProductBefore.text();
+                                String s1 = priceOfProductBefore.text();
+                                char[] a1 = s1.toCharArray();
+                                String new1 = null;
+
+                                for (int x = 0; x<(a1.length)/2; x++){
+                                    new1 = new1 + a1[x];
+                                }
+                                temp2 = "Price before: " + new1;
                             }
 
                             //product discounted price loop
@@ -656,7 +663,14 @@ public class Main2Activity extends AppCompatActivity {
 
                             //product original price loop
                             for (Element priceOfProductBefore : elpricebefore1) {
-                                temp2 = "Price before: " + priceOfProductBefore.text();
+                                String s1 = priceOfProductBefore.text();
+                                char[] a1 = s1.toCharArray();
+                                String new1 = null;
+
+                                for (int x = 0; x<(a1.length)/2; x++){
+                                    new1 = new1 + a1[x];
+                                }
+                                temp2 = "Price before: " + new1;
                             }
 
                             //product discounted price loop
