@@ -496,7 +496,15 @@ public class Main2Activity extends AppCompatActivity {
 
                     //product original price loop
                     for (Element priceOfProductBefore : elpricebefore) {
-                        temp2 = "Price before: " + priceOfProductBefore.text();
+                        String s1 = priceOfProductBefore.text();
+                        char[] a1 = s1.toCharArray();
+                        String new1 = "₹ ";
+                        int diff = (a1.length)-3;
+
+                        for (int x = 0; x<diff-1; x++){
+                            new1 = new1 + a1[x];
+                        }
+                        temp2 = "Price before: " + new1;
                     }
 
                     //product discounted price loop
