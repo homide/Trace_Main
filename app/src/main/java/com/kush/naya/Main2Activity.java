@@ -591,9 +591,9 @@ public class Main2Activity extends AppCompatActivity {
                             for (Element priceOfProductBefore : elpricebefore) {
                                 String s1 = priceOfProductBefore.text();
                                 char[] a1 = s1.toCharArray();
-                                String new1 = null;
+                                String new1 = "₹ ";
 
-                                for (int x = 0; x<(a1.length)/2; x++){
+                                for (int x = 1; x<(a1.length)/2; x++){
                                     new1 = new1 + a1[x];
                                 }
                                 temp2 = "Price before: " + new1;
@@ -601,7 +601,7 @@ public class Main2Activity extends AppCompatActivity {
 
                             //product discounted price loop
                             for (Element priceOfProductAfter : elpriceafter) {
-                                temp3 ="Discounted price: " + priceOfProductAfter.text();
+                                temp3 ="Discounted price: ₹ " + priceOfProductAfter.text();
                                 break;
                             }
 
@@ -665,9 +665,9 @@ public class Main2Activity extends AppCompatActivity {
                             for (Element priceOfProductBefore : elpricebefore1) {
                                 String s1 = priceOfProductBefore.text();
                                 char[] a1 = s1.toCharArray();
-                                String new1 = null;
+                                String new1 = "₹ ";
 
-                                for (int x = 0; x<(a1.length)/2; x++){
+                                for (int x = 1; x<(a1.length)/2; x++){
                                     new1 = new1 + a1[x];
                                 }
                                 temp2 = "Price before: " + new1;
@@ -675,7 +675,7 @@ public class Main2Activity extends AppCompatActivity {
 
                             //product discounted price loop
                             for (Element priceOfProductAfter : elpriceafter1) {
-                                temp3 ="Discounted price: " + priceOfProductAfter.text();
+                                temp3 ="Discounted price: ₹ " + priceOfProductAfter.text();
                                 break;
                             }
 
