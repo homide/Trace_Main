@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
 //    public Spinner spinnerCat;
+    // faalu comment
 
     public void flipkartButton(View view){
         Intent intent = new Intent((Intent.ACTION_VIEW));
