@@ -9,6 +9,7 @@ Right now the app is in the development phase, so to use the app, you need to cl
 ### Prerequisites
 
 => Android Based Device
+
 => Internet Connection 
 
 ```
