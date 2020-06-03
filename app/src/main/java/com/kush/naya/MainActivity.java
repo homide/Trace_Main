@@ -81,21 +81,30 @@ public class MainActivity extends AppCompatActivity {
                     ProgressDialog pd = new ProgressDialog(MainActivity.this);
                     pd.setMessage("Searching websites...");
                     pd.show();
-                    for(int i = 0; i<5; i++){
-                        switch (i){
-                            case 1:
-                                Flipkart flip = new Flipkart();
-                                flip.execute("https://www.flipkart.com/search?q=" + searchtext+ "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
-                                Paytm pyt = new Paytm();
-                                pyt.execute("https://www.paytmmall.com/shop/search?q=" + searchtext + "&from=organic&child_site_id=6");
+                    Thread t1 = new Thread(){
+                        public void run(){
+                            Flipkart flip = new Flipkart();
+                            flip.execute("https://www.flipkart.com/search?q=" + searchtext+ "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
+                        }
+                    };
+
+                    Thread t2 = new Thread(){
+                        public void run(){
+                            Paytm pyt = new Paytm();
+                            pyt.execute("https://www.paytmmall.com/shop/search?q=" + searchtext + "&from=organic&child_site_id=6");
+                        }
+                    };
+
+                    Thread t3 = new Thread(){
+                        public void run(){
                                 Snapdeal snap = new Snapdeal();
                                 snap.execute("https://www.snapdeal.com/search?keyword=" + searchtext+ "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
-                                Amazon amz = new Amazon();
-                                amz.execute("https://www.amazon.in/s?k=" + searchtext + "&ref=nb_sb_noss_2");
-                                break;
-
                         }
-                    }
+                    };
+                    t1.start();
+                    t2.start();
+                    t3.start();
+
                     new Handler().postDelayed(new Runnable() {
                         @Override
                         public void run() {
@@ -107,25 +116,10 @@ public class MainActivity extends AppCompatActivity {
                             intent.putExtra(EXTRA_TEXT, searchtext);
                             startActivity(intent);
                         }
-                    }, 8000);
+                    }, 5000);
                 }
             }
         });
-
-
-//        final String[]arrayCat=getResources().getStringArray(R.array.Categories);
-//        spinnerCat=findViewById(R.id.spinnerCat);
-//        spinnerCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                Toast.makeText(MainActivity.this, ""+arrayCat[position], Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
     }
 
@@ -519,198 +513,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class Amazon extends AsyncTask<String, Void, ArrayList<String>> {
-        ArrayList<String> tempurlstore = new ArrayList<String>();
-        @Override
-        protected void onPostExecute(ArrayList<String> s) {
-            String product;
-            String urlstore;
-            super.onPostExecute(s);
-            for(int j = 0; j <6; j++){
-                product = s.get(j);
-                urlstore = tempurlstore.get(j);
-                allproducts.add(product);
-                producturl.add(urlstore);
-            }
-//            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    String[] tem = new String[5];
-//                    Intent intent = null;
-//                    for(int i = 0; i<5 ; i++){
-//                        tem[i] = tempurlstore.get(i);
-//                        intent.setData(Uri.parse(tem[i]));
-//                    }
-//                    intent = new Intent((Intent.ACTION_VIEW));
-//                    startActivity(intent);
-//                }
-//            });
-        }
-        @Override
-        protected ArrayList<String> doInBackground(String... strings) {
-            try {
-                Document doc = Jsoup.connect(strings[0]).get();
-                Elements links = doc.getElementsByClass("a-section a-spacing-medium"); //vertical results
-                Elements links1 = doc.getElementsByClass("a-section a-spacing-medium a-text-center"); //grid results
-                ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("                  AMAZON                  ");
-
-
-                for (Element testlink1 : links) {
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
-                    String permanent1 = null;
-
-                    Elements eltitle1 = testlink1.getElementsByClass("a-size-medium a-color-base a-text-normal");
-
-                    if (eltitle1.size() > 0) {
-                        for (Element link : links) {
-
-                            Elements elLink = link.getElementsByTag("a");
-
-                            Elements eltitle2 = link.getElementsByClass("a-size-medium a-color-base a-text-normal");
-
-                            Elements elpricebefore = link.getElementsByClass("a-price a-text-price");
-
-
-                            Elements elpriceafter = link.getElementsByClass("a-price");
-
-
-                            Elements discount = link.getElementsByClass("a-letter-space");
-
-                            Elements image = link.select("img");
-
-
-                            for (Element titleOfProduct : eltitle2) {
-                                temp1 ="Title: " + titleOfProduct.text();
-                            }
-                            //for image
-//                            for (Element img23 : image) {
-//
-//                            }
-
-                            //product original price loop
-                            for (Element priceOfProductBefore : elpricebefore) {
-                                String s1 = priceOfProductBefore.text();
-                                char[] a1 = s1.toCharArray();
-                                String new1 = "₹ ";
-
-                                for (int x = 1; x<(a1.length)/2; x++){
-                                    new1 = new1 + a1[x];
-                                }
-                                temp2 = "Price before: " + new1;
-                            }
-
-                            //product discounted price loop
-                            for (Element priceOfProductAfter : elpriceafter) {
-                                temp3 ="Discounted price: ₹ " + priceOfProductAfter.text();
-                                break;
-                            }
-
-                            //discount in number loop
-                            for (Element productdiscount : discount) {
-                                temp4 ="Discount: " +  productdiscount.text();
-                                break;
-                            }
-                            ArrayList<String> linkArray = new ArrayList<String>();
-                            for (Element elementLink : elLink) {
-                                String MainLink = "https://www.amazon.in"+ elementLink.attr("href");
-                                linkArray.add(MainLink);
-                                break;
-                            }
-                            for (int j = 0; j < 1; j++) {
-                                temp5 = linkArray.get(0);
-                            }
-                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
-                            mainlist.add(permanent1);
-                            tempurlstore.add(temp5);
-
-                        }return mainlist;
-                    }
-                    break;
-                }
-
-                for (Element testlink2 : links1) {
-
-                    Elements Testrun = testlink2.getElementsByClass("a-link-normal a-text-normal");
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
-                    String permanent1 = null;
-
-                    if (Testrun.size() > 0) {
-                        for (Element link1 : links1) {
-                            Elements elLink1 = link1.getElementsByTag("a");
-
-                            Elements eltitle2 = link1.getElementsByClass("a-size-base-plus a-color-base a-text-normal");
-
-
-                            Elements elpricebefore1 = link1.getElementsByClass("a-price a-text-price");
-
-
-                            Elements elpriceafter1 = link1.getElementsByClass("a-price-whole");
-
-                            Elements discount1 = link1.getElementsByClass("a-letter-space");
-
-                            Elements img1 = link1.select("img");
-
-
-                            //product title loop
-
-                            for (Element titleOfProduct : eltitle2) {
-                                temp1 ="Title: " + titleOfProduct.text();
-                            }
-                            //for image
-//                            for (Element img23 : image) {
-//
-//                            }
-
-                            //product original price loop
-                            for (Element priceOfProductBefore : elpricebefore1) {
-                                String s1 = priceOfProductBefore.text();
-                                char[] a1 = s1.toCharArray();
-                                String new1 = "₹ ";
-
-                                for (int x = 1; x<(a1.length)/2; x++){
-                                    new1 = new1 + a1[x];
-                                }
-                                temp2 = "Price before: " + new1;
-
-                            }
-
-                            //product discounted price loop
-                            for (Element priceOfProductAfter : elpriceafter1) {
-                                temp3 ="Discounted price: ₹ " + priceOfProductAfter.text();
-                                break;
-                            }
-
-                            //discount in number loop
-                            for (Element productdiscount : discount1) {
-                                temp4 ="Discount: " +  productdiscount.text();
-                                break;
-                            }
-                            ArrayList<String> linkArray = new ArrayList<String>();
-                            for (Element elementLink : elLink1) {
-                                String MainLink = "https://www.amazon.in"+ elementLink.attr("href");
-                                linkArray.add(MainLink);
-                                break;
-                            }
-                            for (int j = 0; j < 1; j++) {
-                                temp5 = linkArray.get(0);
-                            }
-                            permanent1 = temp1 +"\n" + temp2 +"\n" + temp3 + "\n" + temp4 +"\n";
-                            mainlist.add(permanent1);
-                            tempurlstore.add(temp5);
-
-                        }
-                    }
-                    break;
-                } return mainlist;
-            } catch (Exception e) {
-                ArrayList<String> exception = new ArrayList<String>();
-                String ex = e.toString();
-                exception.add(ex);
-                return exception;
-            }
-        }
-    }
 
 
 
