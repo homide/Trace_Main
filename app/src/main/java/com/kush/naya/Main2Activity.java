@@ -60,7 +60,7 @@ public class Main2Activity extends AppCompatActivity {
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    String link = tempurllist.get(position-1);
+                    String link = tempurllist.get(position);
                     Intent intent = new Intent((Intent.ACTION_VIEW));
                     intent.setData(Uri.parse(link));
                     startActivity(intent);
@@ -131,7 +131,7 @@ public class Main2Activity extends AppCompatActivity {
                     listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String link = producturl.get(position-1);
+                            String link = producturl.get(position);
                             Intent intent = new Intent((Intent.ACTION_VIEW));
                             intent.setData(Uri.parse(link));
                             startActivity(intent);
@@ -173,7 +173,7 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         @Override
-        protected ArrayList<String> doInBackground(String... strings) {
+        protected ArrayList<String> doInBackground(final String... strings) {
             try {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3O0U0u");
@@ -181,6 +181,7 @@ public class Main2Activity extends AppCompatActivity {
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 ArrayList<String> mainlist = new ArrayList<String>();
                 mainlist.add("                              FLIPKART                              ");
+                tempurlstore.add(strings[0]);
 
                 for (Element testlink1 : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
@@ -392,6 +393,7 @@ public class Main2Activity extends AppCompatActivity {
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
                 mainlist.add("               SNAPDEAL               ");
+                tempurlstore.add(strings[0]);
 
 
                 for (Element link : links) {
@@ -476,6 +478,7 @@ public class Main2Activity extends AppCompatActivity {
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
                 mainlist.add("               PAYTM               ");
+                tempurlstore.add(strings[0]);
 
                 for (Element link : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;

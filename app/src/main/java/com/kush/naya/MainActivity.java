@@ -152,7 +152,8 @@ public class MainActivity extends AppCompatActivity {
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 Elements maskssans = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("                     FLIPKART                              ");
+                mainlist.add("-----------------FLIPKART---------------------");
+                tempurlstore.add(strings[0]);
 
                 for (Element testlink1 : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
@@ -421,6 +422,7 @@ public class MainActivity extends AppCompatActivity {
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
                 mainlist.add("               SNAPDEAL               ");
+                tempurlstore.add(strings[0]);
 
 
                 for (Element link : links) {
@@ -505,6 +507,7 @@ public class MainActivity extends AppCompatActivity {
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
                 mainlist.add("               PAYTM               ");
+                tempurlstore.add(strings[0]);
 
                 for (Element link : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
