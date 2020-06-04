@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
     String searchtext;
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
-//    public Spinner spinnerCat;
-    // faalu comment
 
     public void flipkartButton(View view){
         Intent intent = new Intent((Intent.ACTION_VIEW));
@@ -152,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 Elements maskssans = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("-----------------FLIPKART---------------------");
+                mainlist.add("FLIPKART (Tap here to see all products) ");
                 tempurlstore.add(strings[0]);
 
                 for (Element testlink1 : links) {
@@ -205,7 +203,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                            permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
                         }
@@ -263,7 +261,7 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 0; i < 1; i++) {
                                     temp5 = "https://www.flipkart.com" + linkArray.get(0);
                                 }
-                                permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                                permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                                 mainlist.add(permanent1);
                                 tempurlstore.add(temp5);
                             }
@@ -322,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                            permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
                         }
@@ -380,7 +378,7 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                            permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
 
@@ -421,7 +419,7 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("               SNAPDEAL               ");
+                mainlist.add("SNAPDEAL (Tap here to see all products) ");
                 tempurlstore.add(strings[0]);
 
 
@@ -469,7 +467,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 0; j < 1; j++) {
                         temp5 = linkArray.get(0);
                     }
-                    permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                    permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
 
@@ -506,7 +504,7 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("               PAYTM               ");
+                mainlist.add("PAYTM (Tap here to see all products) ");
                 tempurlstore.add(strings[0]);
 
                 for (Element link : links) {
@@ -560,7 +558,7 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < linkArray.size(); i++) {
                         temp5 = "https://www.paytmmall.com" + linkArray.get(0);
                     }
-                    permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                    permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
 

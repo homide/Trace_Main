@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -55,7 +57,23 @@ public class Main2Activity extends AppCompatActivity {
 
 
         if (temparraylist.isEmpty() != true) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, temparraylist);
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, temparraylist){
+                @Override
+                public View getView(int position, View convertView, ViewGroup parent){
+                    View view = super.getView(position, convertView, parent);
+                    if (position ==0 || position == 6 || position == 12){
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,22);
+                    }
+                    else{
+                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,16);
+                    }
+                    return view;
+                }
+            };
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -100,7 +118,23 @@ public class Main2Activity extends AppCompatActivity {
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             pd.dismiss();
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts);
+                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts){
+                                @Override
+                                public View getView(int position, View convertView, ViewGroup parent){
+                                    View view = super.getView(position, convertView, parent);
+                                    if (position ==0 || position == 6 || position == 12){
+                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,22);
+                                    }
+                                    else{
+                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+                                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,16);
+                                    }
+                                    return view;
+                                }
+                            };
                             listview.setAdapter(adapter);
                         }
                     }, 5000);
@@ -180,8 +214,9 @@ public class Main2Activity extends AppCompatActivity {
                 Elements links = doc.getElementsByClass("_3O0U0u");
                 Elements links1 = doc.getElementsByClass("_3liAhj");
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
+                Elements maskssans = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("                              FLIPKART                              ");
+                mainlist.add("FLIPKART (Tap here to see all products) ");
                 tempurlstore.add(strings[0]);
 
                 for (Element testlink1 : links) {
@@ -234,7 +269,7 @@ public class Main2Activity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                            permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
                         }
@@ -292,7 +327,7 @@ public class Main2Activity extends AppCompatActivity {
                                 for (int i = 0; i < 1; i++) {
                                     temp5 = "https://www.flipkart.com" + linkArray.get(0);
                                 }
-                                permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                                permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                                 mainlist.add(permanent1);
                                 tempurlstore.add(temp5);
                             }
@@ -351,11 +386,69 @@ public class Main2Activity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                            permanent1 ="\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
                         }
 
+                    }
+
+                }
+
+                for (Element maska : maskssans) {
+                    Elements masktitle = maska.getElementsByClass("_2cLu-l");
+
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String permanent1 = null;
+
+                    if (masktitle.size() > 0) {
+                        for (Element mask : maskssans) {
+
+                            Elements mlink = mask.getElementsByTag("a");
+
+                            Elements mpricebefore = mask.getElementsByClass("_3auQ3N");
+
+
+                            Elements mpriceafter = mask.getElementsByClass("_1vC4OE");
+
+
+                            Elements mdiscount = mask.getElementsByClass("VGWI6T");
+
+                            for (Element mtitle : masktitle) {
+                                temp1 = "Title: " + mtitle.text();
+
+                            }
+
+                            //product original price loop
+                            for (Element mproductpricebefore : mpricebefore) {
+                                temp2 = "Price before: " + mproductpricebefore.text();
+                            }
+
+                            //product discounted price loop
+                            for (Element mproductproceafter : mpriceafter) {
+                                temp3 = "Discounted price: " + mproductproceafter.text();
+
+                            }
+
+                            //discount in number loop
+                            for (Element mproductdiscount : mdiscount) {
+                                temp4 = "Discount: " + mproductdiscount.text();
+
+                            }
+
+                            ArrayList<String> linkArray = new ArrayList<String>();
+                            for (Element melementLink : mlink) {
+                                String fMainLink = melementLink.attr("href");
+                                linkArray.add(fMainLink);
+                            }
+                            for (int i = 0; i < (linkArray.size()); i++) {
+                                temp5 = "https://www.flipkart.com" + linkArray.get(0);
+                            }
+                            permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                            mainlist.add(permanent1);
+                            tempurlstore.add(temp5);
+
+                        }
                     }
 
                 }
@@ -393,7 +486,7 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("               SNAPDEAL               ");
+                mainlist.add("SNAPDEAL (Tap here to see all products) ");
                 tempurlstore.add(strings[0]);
 
 
@@ -441,7 +534,7 @@ public class Main2Activity extends AppCompatActivity {
                     for (int j = 0; j < 1; j++) {
                         temp5 = linkArray.get(0);
                     }
-                    permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                    permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
 
@@ -478,7 +571,7 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("               PAYTM               ");
+                mainlist.add("PAYTM (Tap here to see all products) ");
                 tempurlstore.add(strings[0]);
 
                 for (Element link : links) {
@@ -532,7 +625,7 @@ public class Main2Activity extends AppCompatActivity {
                     for (int i = 0; i < linkArray.size(); i++) {
                         temp5 = "https://www.paytmmall.com" + linkArray.get(0);
                     }
-                    permanent1 = temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                    permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
 
