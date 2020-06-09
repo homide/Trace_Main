@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Html;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,7 +64,8 @@ public class Main2Activity extends AppCompatActivity {
                     View view = super.getView(position, convertView, parent);
                     if (position ==0 || position == 6 || position == 12){
                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
+                        String underlined = "<u>" + tv.getText() + "</u>";
+                        tv.setText(Html.fromHtml(underlined));
                         tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,22);
                     }
                     else{
@@ -124,8 +126,9 @@ public class Main2Activity extends AppCompatActivity {
                                     View view = super.getView(position, convertView, parent);
                                     if (position ==0 || position == 6 || position == 12){
                                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,22);
+                                        String underlined = "<u>" + tv.getText() + "</u>";
+                                        tv.setText(Html.fromHtml(underlined));
+                                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
                                     }
                                     else{
                                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
@@ -230,6 +233,8 @@ public class Main2Activity extends AppCompatActivity {
 
                             Elements elLink = link.getElementsByTag("a");
 
+                            Elements eltitle2 = testlink1.getElementsByClass("_3wU53n");
+
                             Elements elpricebefore = link.getElementsByClass("_3auQ3N _2GcJzG");
 
 
@@ -239,7 +244,7 @@ public class Main2Activity extends AppCompatActivity {
                             Elements discount = link.getElementsByClass("VGWI6T");
 
 
-                            for (Element titleOfProduct : eltitle1) {
+                            for (Element titleOfProduct : eltitle2) {
                                 temp1 = "Title: " + titleOfProduct.text();
 
                             }
@@ -347,6 +352,8 @@ public class Main2Activity extends AppCompatActivity {
 
                             Elements flink = fash.getElementsByTag("a");
 
+                            Elements fashiontitlem = fashion.getElementsByClass("_2mylT6");
+
                             Elements fpricebefore = fash.getElementsByClass("_3auQ3N");
 
 
@@ -356,7 +363,7 @@ public class Main2Activity extends AppCompatActivity {
                             Elements fdiscount = fash.getElementsByClass("VGWI6T");
 
 
-                            for (Element ftitle : fashiontitle) {
+                            for (Element ftitle : fashiontitlem) {
                                 temp1 = "Title: " + ftitle.text();
 
                             }
@@ -406,6 +413,9 @@ public class Main2Activity extends AppCompatActivity {
 
                             Elements mlink = mask.getElementsByTag("a");
 
+                            Elements masktitle1 = maska.getElementsByClass("_2cLu-l");
+
+
                             Elements mpricebefore = mask.getElementsByClass("_3auQ3N");
 
 
@@ -414,7 +424,7 @@ public class Main2Activity extends AppCompatActivity {
 
                             Elements mdiscount = mask.getElementsByClass("VGWI6T");
 
-                            for (Element mtitle : masktitle) {
+                            for (Element mtitle : masktitle1) {
                                 temp1 = "Title: " + mtitle.text();
 
                             }

@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements elpricebefore = link.getElementsByClass("_3auQ3N _2GcJzG");
 
+                            Elements eltitle2 = testlink1.getElementsByClass("_3wU53n");
 
                             Elements elpriceafter = link.getElementsByClass("_1vC4OE _2rQ-NK");
 
@@ -283,6 +284,8 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements fpricebefore = fash.getElementsByClass("_3auQ3N");
 
+                            Elements fashiontitle1 = fashion.getElementsByClass("_2mylT6");
+
 
                             Elements fpriceafter = fash.getElementsByClass("_1vC4OE");
 
@@ -290,7 +293,7 @@ public class MainActivity extends AppCompatActivity {
                             Elements fdiscount = fash.getElementsByClass("VGWI6T");
 
 
-                            for (Element ftitle : fashiontitle) {
+                            for (Element ftitle : fashiontitle1) {
                                 temp1 = "Title: " + ftitle.text();
 
                             }
@@ -342,13 +345,15 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements mpricebefore = mask.getElementsByClass("_3auQ3N");
 
+                            Elements masktitle1 = maska.getElementsByClass("_2cLu-l");
+
 
                             Elements mpriceafter = mask.getElementsByClass("_1vC4OE");
 
 
                             Elements mdiscount = mask.getElementsByClass("VGWI6T");
 
-                            for (Element mtitle : masktitle) {
+                            for (Element mtitle : masktitle1) {
                                 temp1 = "Title: " + mtitle.text();
 
                             }
