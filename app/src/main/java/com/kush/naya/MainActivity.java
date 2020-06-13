@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void amazonButton(View view){
+    public void shopcluesButton(View view){
         Intent intent = new Intent((Intent.ACTION_VIEW));
-        intent.setData(Uri.parse("https://www.amazon.in"));
+        intent.setData(Uri.parse("https://www.shopclues.com"));
         startActivity(intent);
     }
 
