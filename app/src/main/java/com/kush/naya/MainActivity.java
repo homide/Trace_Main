@@ -217,7 +217,17 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                            if (elpricebefore.text()==null)
+                            {
+                                permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                            }
+
+                            else
+                            {
+                                permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                            }
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
                         }
@@ -275,7 +285,16 @@ public class MainActivity extends AppCompatActivity {
                                 for (int i = 0; i < 1; i++) {
                                     temp5 = "https://www.flipkart.com" + linkArray.get(0);
                                 }
-                                permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                                if (elpricebefore1.text()==null)
+                                {
+                                    permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter1.text() + "\n" + temp4 + "\n";
+                                }
+
+                                else
+                                {
+                                    permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                                }
                                 mainlist.add(permanent1);
                                 tempurlstore.add(temp5);
                             }
@@ -336,7 +355,17 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                            if (fpricebefore.text()==null)
+                            {
+                                permanent1 = "\n" + temp1 + "\n" + "Price :" + fpriceafter.text() + "\n" + temp4 + "\n";
+                            }
+
+                            else
+                            {
+                                permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                            }
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
                         }
@@ -396,7 +425,17 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                            if (mpricebefore.text()==null)
+                            {
+                                permanent1 = "\n" + temp1 + "\n" + "Price :" + mpriceafter.text() + "\n" + temp4 + "\n";
+                            }
+
+                            else
+                            {
+                                permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                            }
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
 
@@ -489,7 +528,17 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 0; j < 1; j++) {
                         temp5 = linkArray.get(0);
                     }
-                    permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                    if (elpricebefore.text()==null)
+                    {
+                        permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                    }
+
+                    else
+                    {
+                        permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                    }
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
 
@@ -585,7 +634,17 @@ public class MainActivity extends AppCompatActivity {
                     for (int i = 0; i < linkArray.size(); i++) {
                         temp5 = "https://www.paytmmall.com" + linkArray.get(0);
                     }
-                    permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                    if (elpricebefore.text()==null)
+                    {
+                        permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                    }
+
+                    else
+                    {
+                        permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                    }
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
 
@@ -676,7 +735,17 @@ public class MainActivity extends AppCompatActivity {
                     for (int j = 0; j < 1; j++) {
                         temp5 = "https:" + linkArray.get(0);
                     }
-                    permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                    if (elpricebefore.text()==null)
+                    {
+                        permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                    }
+
+                    else
+                    {
+                        permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+
+                    }
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
 
