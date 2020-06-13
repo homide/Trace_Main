@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                                 intent.putExtra(EXTRA_TEXT, searchtext);
                                 startActivity(intent);
                             }
-                        }, 5500);
+                        }, 6500);
 
                 }
             }
@@ -134,7 +134,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class Flipkart extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> tempurlstore = new ArrayList<>();
-
+        String link;
         @Override
         protected void onPostExecute(ArrayList<String> s) {
             ArrayAdapter<String> adapter = null;
@@ -147,6 +147,9 @@ public class MainActivity extends AppCompatActivity {
                 allproducts.add(product);
                 producturl.add(urlstore);
             }
+            String seemore = "See more products on website....";
+            allproducts.add(seemore);
+            producturl.add(link);
 
         }
 
@@ -159,8 +162,9 @@ public class MainActivity extends AppCompatActivity {
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 Elements maskssans = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("FLIPKART (Tap here to see all products) ");
-                tempurlstore.add(strings[0]);
+                mainlist.add("FLIPKART");
+                link = strings[0];
+                tempurlstore.add("https://www.flipkart.com");
 
                 for (Element testlink1 : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
@@ -412,7 +416,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class Snapdeal extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> tempurlstore = new ArrayList<>();
-
+        String link;
         @Override
         protected void onPostExecute(ArrayList<String> s) {
             String product;
@@ -424,6 +428,9 @@ public class MainActivity extends AppCompatActivity {
                 allproducts.add(product);
                 producturl.add(urlstore);
             }
+            String seemore = "See more products on website....";
+            allproducts.add(seemore);
+            producturl.add(link);
 
         }
 
@@ -433,8 +440,9 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("SNAPDEAL (Tap here to see all products) ");
-                tempurlstore.add(strings[0]);
+                mainlist.add("SNAPDEAL");
+                link = strings[0];
+                tempurlstore.add("https://www.snapdeal.com");
 
 
                 for (Element link : links) {
@@ -498,6 +506,7 @@ public class MainActivity extends AppCompatActivity {
 
     public class Paytm extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> tempurlstore = new ArrayList<>();
+        String link;
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
@@ -510,6 +519,9 @@ public class MainActivity extends AppCompatActivity {
                 allproducts.add(product);
                 producturl.add(urlstore);
             }
+            String seemore = "See more products on website....";
+            allproducts.add(seemore);
+            producturl.add(link);
         }
 
         @Override
@@ -518,8 +530,9 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("PAYTM (Tap here to see all products) ");
-                tempurlstore.add(strings[0]);
+                mainlist.add("PAYTM");
+                link = strings[0];
+                tempurlstore.add("https://www.paytmmall.com");
 
                 for (Element link : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
@@ -589,6 +602,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class Shopclues extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> tempurlstore = new ArrayList<>();
+        String link;
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
@@ -601,6 +615,9 @@ public class MainActivity extends AppCompatActivity {
                 allproducts.add(product);
                 producturl.add(urlstore);
             }
+            String seemore = "See more products on website....";
+            allproducts.add(seemore);
+            producturl.add(link);
 
         }
 
@@ -610,8 +627,9 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("column col3 search_blocks");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("SHOPCLUES (Tap here to see all products) ");
-                tempurlstore.add(strings[0]);
+                mainlist.add("SHOPCLUES");
+                link = strings[0];
+                tempurlstore.add("https://www.shopclues.com");
 
 
                 for (Element link : links) {
