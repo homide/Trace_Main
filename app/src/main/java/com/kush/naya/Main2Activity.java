@@ -61,7 +61,7 @@ public class Main2Activity extends AppCompatActivity {
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent){
                     View view = super.getView(position, convertView, parent);
-                    if (position ==0 || position == 6 || position == 12){
+                    if (position ==0 || position == 6 || position == 12 || position == 18){
                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
                         String underlined = "<u>" + tv.getText() + "</u>";
                         tv.setText(Html.fromHtml(underlined));
@@ -123,7 +123,7 @@ public class Main2Activity extends AppCompatActivity {
                                 @Override
                                 public View getView(int position, View convertView, ViewGroup parent){
                                     View view = super.getView(position, convertView, parent);
-                                    if (position ==0 || position == 6 || position == 12){
+                                    if (position ==0 || position == 6 || position == 12 || position == 18){
                                         TextView tv = (TextView) view.findViewById(android.R.id.text1);
                                         String underlined = "<u>" + tv.getText() + "</u>";
                                         tv.setText(Html.fromHtml(underlined));
