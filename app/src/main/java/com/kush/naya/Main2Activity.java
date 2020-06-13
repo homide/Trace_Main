@@ -191,8 +191,6 @@ public class Main2Activity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
     //
 
@@ -889,5 +887,14 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    @Override
+    public void onBackPressed() {
+//        Intent categoryIntent = new Intent (Main2Activity.this, MainActivity.class);
+//        startActivity(categoryIntent);
+//        finish();
+        startActivity(new Intent(Main2Activity.this,MainActivity.class));
+        finish();
     }
 }
