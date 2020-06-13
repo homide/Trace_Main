@@ -620,7 +620,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Elements elLink = link.getElementsByTag("a");
 
-                    Elements eltitle = link.getElementsByClass("img_section"); //for product title
+                    Elements eltitle = link.getElementsByTag("h2"); //for product title
 
                     Elements elpricebefore = link.getElementsByClass("old_prices");
 
