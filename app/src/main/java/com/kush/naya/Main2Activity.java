@@ -52,7 +52,6 @@ public class Main2Activity extends AppCompatActivity {
         final ArrayList<String> tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
         listview = (ListView) findViewById(R.id.listView);
 
-
         TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Showing Results for: "+input1);
 
@@ -140,7 +139,7 @@ public class Main2Activity extends AppCompatActivity {
                             };
                             listview.setAdapter(adapter);
                         }
-                    }, 5000);
+                    }, 5500);
 
                     Thread t1 = new Thread(){
                         public void run(){
@@ -251,18 +250,30 @@ public class Main2Activity extends AppCompatActivity {
 
                             //product original price loop
                             for (Element priceOfProductBefore : elpricebefore) {
-                                temp2 = "Price before: " + priceOfProductBefore.text();
+                                if(priceOfProductBefore == null){
+                                    temp2 = "";
+                                }else{
+                                    temp2 = "Price before: " + priceOfProductBefore.text();
+                                }
                             }
 
                             //product discounted price loop
                             for (Element priceOfProductAfter : elpriceafter) {
-                                temp3 = "Discounted price: " + priceOfProductAfter.text();
+                                if(temp3 == null){
+                                    temp3 = "Price: " + priceOfProductAfter.text();
+                                }else{
+                                    temp3 = "Discounted price: " + priceOfProductAfter.text();
+                                }
 
                             }
 
                             //discount in number loop
                             for (Element productdiscount : discount) {
-                                temp4 = "Discount: " + productdiscount.text();
+                                if(discount == null){
+                                    temp4 = "";
+                                }else{
+                                    temp4 = "Discount: " + productdiscount.text();
+                                }
 
                             }
 

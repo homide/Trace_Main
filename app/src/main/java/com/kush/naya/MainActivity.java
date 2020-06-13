@@ -75,35 +75,35 @@ public class MainActivity extends AppCompatActivity {
                 if (searchtext.length() <= 0) {
                     Toast.makeText(MainActivity.this, "Please add something to search.", Toast.LENGTH_SHORT).show();
                 }
-                else{
+                else {
                     ProgressDialog pd = new ProgressDialog(MainActivity.this);
                     pd.setMessage("Searching websites...");
                     pd.show();
-                    Thread t1 = new Thread(){
-                        public void run(){
-                            ShopClues Sc = new ShopClues();
-                            Sc.execute("https://www.shopclues.com/search?q=" + searchtext);
+                    Thread t1 = new Thread() {
+                        public void run() {
+                            Flipkart flip = new Flipkart();
+                            flip.execute("https://www.flipkart.com/search?q=" + searchtext + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
                         }
                     };
 
-                    Thread t2 = new Thread(){
-                        public void run(){
+                    Thread t2 = new Thread() {
+                        public void run() {
                             Paytm pyt = new Paytm();
                             pyt.execute("https://www.paytmmall.com/shop/search?q=" + searchtext + "&from=organic&child_site_id=6");
                         }
                     };
 
-                    Thread t3 = new Thread(){
-                        public void run(){
-                                Snapdeal snap = new Snapdeal();
-                                snap.execute("https://www.snapdeal.com/search?keyword=" + searchtext+ "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
+                    Thread t3 = new Thread() {
+                        public void run() {
+                            Snapdeal snap = new Snapdeal();
+                            snap.execute("https://www.snapdeal.com/search?keyword=" + searchtext + "&santizedKeyword=&catId=&categoryId=0&suggested=true&vertical=&noOfResults=20&searchState=&clickSrc=suggested&lastKeyword=&prodCatId=&changeBackToAll=false&foundInAll=false&categoryIdSearched=&cityPageUrl=&categoryUrl=&url=&utmContent=&dealDetail=&sort=rlvncy");
                         }
                     };
 
-                    Thread t4 = new Thread(){
+                    Thread t4 = new Thread() {
                         public void run(){
-                            Flipkart flip = new Flipkart();
-                            flip.execute("https://www.flipkart.com/search?q=" + searchtext+ "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off");
+                            Shopclues shopclues = new Shopclues();
+                            shopclues.execute("https://www.shopclues.com/search?q="+searchtext +"&sc_z=2222&z=0&count=10");
                         }
                     };
                     t1.start();
@@ -111,18 +111,19 @@ public class MainActivity extends AppCompatActivity {
                     t3.start();
                     t4.start();
 
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            Intent intent = new Intent(MainActivity.this, Main2Activity.class);
-                            Bundle args = new Bundle();
-                            args.putSerializable("ARRAYLIST",(Serializable)allproducts);
-                            args.putSerializable("URLLINKS" , (Serializable) producturl);
-                            intent.putExtra("BUNDLE",args);
-                            intent.putExtra(EXTRA_TEXT, searchtext);
-                            startActivity(intent);
-                        }
-                    }, 5000);
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+                                Bundle args = new Bundle();
+                                args.putSerializable("ARRAYLIST", (Serializable) allproducts);
+                                args.putSerializable("URLLINKS", (Serializable) producturl);
+                                intent.putExtra("BUNDLE", args);
+                                intent.putExtra(EXTRA_TEXT, searchtext);
+                                startActivity(intent);
+                            }
+                        }, 5500);
+
                 }
             }
         });
@@ -586,7 +587,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private class ShopClues extends AsyncTask<String, Void, ArrayList<String>> {
+    private class Shopclues extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> tempurlstore = new ArrayList<>();
 
         @Override
@@ -619,7 +620,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Elements elLink = link.getElementsByTag("a");
 
-                    Elements eltitle = link.getElementsByClass(""); //for product title
+                    Elements eltitle = link.getElementsByClass("img_section"); //for product title
 
                     Elements elpricebefore = link.getElementsByClass("old_prices");
 
@@ -655,7 +656,7 @@ public class MainActivity extends AppCompatActivity {
                     }
 
                     for (int j = 0; j < 1; j++) {
-                        temp5 = linkArray.get(0);
+                        temp5 = "https:" + linkArray.get(0);
                     }
                     permanent1 = "\n" + temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
                     mainlist.add(permanent1);
