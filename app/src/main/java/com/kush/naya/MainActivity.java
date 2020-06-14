@@ -204,7 +204,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             for (Element titleOfProduct : eltitle2) {
-                                temp1 = "Title: " + titleOfProduct.text();
+                                temp1 = titleOfProduct.text();
 
                             }
 
@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                             //product title loop
                             if (eltitle2.size() > 0) {
                                 for (Element titleOfProduct : eltitle2) {
-                                    temp1 = "Title: " + titleOfProduct.text();
+                                    temp1 = titleOfProduct.text();
 
                                 }
 
@@ -371,7 +371,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                             for (Element ftitle : fashiontitlem) {
-                                temp1 = "Title: " + ftitle.text();
+                                temp1 = ftitle.text();
 
                             }
 
@@ -450,7 +450,7 @@ public class MainActivity extends AppCompatActivity {
                             Elements mdiscount = mask.getElementsByClass("VGWI6T");
 
                             for (Element mtitle : masktitle1) {
-                                temp1 = "Title: " + mtitle.text();
+                                temp1 = mtitle.text();
 
                             }
 
@@ -574,7 +574,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //product title loop
                     for (Element titleOfProduct : eltitle) {
-                        temp1 = "Title: " + titleOfProduct.text();
+                        temp1 = titleOfProduct.text();
                     }
 
                     //product original price loop
@@ -683,7 +683,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //product title loop
                     for (Element titleOfProduct : eltitle) {
-                        temp1 = "Title: " + titleOfProduct.text();
+                        temp1 = titleOfProduct.text();
                     }
 
                     //product original price loop
@@ -804,7 +804,7 @@ public class MainActivity extends AppCompatActivity {
 
                     //product title loop
                     for (Element titleOfProduct : eltitle) {
-                        temp1 = "Title: " + titleOfProduct.text();
+                        temp1 = titleOfProduct.text();
                     }
 
                     //product original price loop

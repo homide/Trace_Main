@@ -11,6 +11,7 @@
         android:id="@+id/searchText2"
         android:layout_width="255dp"
         android:layout_height="45dp"
+        android:layout_marginTop="24dp"
         android:autofillHints=""
         android:background="@drawable/custom_search_bar"
         android:drawableStart="@drawable/ic_action_search"
@@ -28,6 +29,7 @@
         android:id="@+id/btnSearch2"
         android:layout_width="72dp"
         android:layout_height="45dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/custom_button"
         android:text="@string/searchButton"
         android:textColor="#FFFFFF"
@@ -48,7 +50,8 @@
     <ListView
         android:id="@+id/listView"
         android:layout_width="410dp"
-        android:layout_height="775dp"
+        android:layout_height="745dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/resultText" />
 
