@@ -112,7 +112,6 @@ public class Main2Activity extends AppCompatActivity {
                     final ProgressDialog pd = new ProgressDialog(Main2Activity.this);
                     pd.setMessage("Searching websites...");
                     pd.show();
-                    resultText.setText("Showing Results for: "+usersearch.getText());
                     if(allproducts.size() > 0){
                         allproducts.clear();
                     }
@@ -129,6 +128,7 @@ public class Main2Activity extends AppCompatActivity {
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
+                            resultText.setText("Showing Results for: "+usersearch.getText());
                             pd.dismiss();
                             listview.setAdapter(adaptor);
                         }

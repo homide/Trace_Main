@@ -195,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements elpriceafter = link.getElementsByClass("_1vC4OE _2rQ-NK");
 
-                            Elements elproductimage = link.getElementsByClass("_3BTv9X");
+                            Elements image = link.select("img");
 
 
                             Elements discount = link.getElementsByClass("VGWI6T");
@@ -244,7 +244,7 @@ public class MainActivity extends AppCompatActivity {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
 
-                            for(Element elimage : elproductimage){
+                            for(Element elimage : image){
                                 temp6 = elimage.attr("src");
                             }
 
@@ -284,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements elpriceafter1 = link1.getElementsByClass("_3auQ3N");
 
-                            Elements elproductimage = link1.getElementsByClass("_3BTv9X");
+                            Elements image = link1.select("img");
 
                             Elements discount1 = link1.getElementsByClass("VGWI6T");
 
@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
                                     temp5 = "https://www.flipkart.com" + linkArray.get(0);
                                 }
 
-                                for(Element elimage : elproductimage){
+                                for(Element elimage : image){
                                     temp6 = elimage.attr("src");
                                 }
 
@@ -363,7 +363,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements fpriceafter = fash.getElementsByClass("_1vC4OE");
 
-                            Elements elproductimage = fash.getElementsByClass("_3togXc");
+                            Elements image = fash.select("img");
 
                             Elements fdiscount = fash.getElementsByClass("VGWI6T");
 
@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                            for(Element elimage : elproductimage){
+                            for(Element elimage : image){
                                 temp6 = elimage.attr("src");
                             }
 
@@ -442,7 +442,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements mpriceafter = mask.getElementsByClass("_1vC4OE");
 
-                            Elements elproductimage =  mask.getElementsByClass("Zhf2z-");
+                            Elements image = mask.select("img");
 
 
                             Elements mdiscount = mask.getElementsByClass("VGWI6T");
@@ -469,7 +469,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                            for(Element elimage : elproductimage){
+                            for(Element elimage : image){
                                 temp6 = elimage.attr("src");
                             }
 
