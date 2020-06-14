@@ -2,26 +2,29 @@ package com.kush.naya;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.Html;
-import android.util.TypedValue;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.squareup.picasso.Picasso;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -38,10 +41,14 @@ public class Main2Activity extends AppCompatActivity {
     public EditText usersearch;
     public String search;
     public TextView resultText;
+    ArrayList<String> titleallproducts = new ArrayList<String>();
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
+    ArrayList<String> imageurls = new ArrayList<String>();
     ArrayList<String> temparraylist;
     ArrayList<String> tempurllist;
+    ArrayList<String> tempimageurl;
+    ArrayList<String> tempproducttitle;
 
     @SuppressLint("StaticFieldLeak")
     @Override
@@ -55,39 +62,30 @@ public class Main2Activity extends AppCompatActivity {
         Bundle args = intent.getBundleExtra("BUNDLE");
         temparraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
         tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
-        ArrayList<String> previousresults = (ArrayList<String>) args.getSerializable("PRESULTS");
+        tempimageurl = (ArrayList<String>) args.getSerializable("IMAGEURL");
+        tempproducttitle = (ArrayList<String>) args.getSerializable("PRODUCTTITLE");
+
 
 
         TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Showing Results for: "+input1);
 
+//        MyAdaptor adaptor = new MyAdaptor(this,temparraylist,tempurllist);
+//        listview.setAdapter(adaptor);
 
+//        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                    String link = tempurllist.get(position);
+//                    Intent intent = new Intent((Intent.ACTION_VIEW));
+//                    intent.setData(Uri.parse(link));
+//                    startActivity(intent);
+//            }
+//        });
 
         if (temparraylist.isEmpty() != true) {
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, temparraylist){
-
-                @Override
-                public View getView(int position, View convertView, ViewGroup parent){
-                    View view = super.getView(position, convertView, parent);
-                    if (position ==0 || position == 7 || position == 14 || position == 21){
-                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                        String underlined = "<u>" + tv.getText() + "</u>";
-                        tv.setText(Html.fromHtml(underlined));
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,22);
-                    }
-//                    if(position == 6 || position == 13 || position == 20|| position == 27){
-//                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-//                        tv.setTextColor(Color.parseColor("#0000FF"));
-//                    }
-                    else{
-                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,16);
-                    }
-                    return view;
-                }
-            };
-
-            listview.setAdapter(adapter);
+            MyAdaptor adaptor = new MyAdaptor(Main2Activity.this,temparraylist,tempurllist,tempproducttitle,tempimageurl);
+            listview.setAdapter(adaptor);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -117,43 +115,23 @@ public class Main2Activity extends AppCompatActivity {
                     pd.setMessage("Searching websites...");
                     pd.show();
                     if(allproducts.size() > 0){
-                        while(allproducts.size() > 0){
-                            int i = 0;
-                            allproducts.remove(i);
-                        }
+                        allproducts.clear();
                     }
                     if(producturl.size() >0){
-                        while(producturl.size() >0){
-                            int i = 0;
-                            producturl.remove(i);
-                        }
+                        producturl.clear();
                     }
+                    if(titleallproducts.size() > 0){
+                        titleallproducts.clear();
+                    }
+                    if(imageurls.size()>0){
+                        imageurls.clear();
+                    }
+                    final MyAdaptor adaptor = new MyAdaptor(Main2Activity.this,allproducts,producturl,titleallproducts,imageurls);
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
                         public void run() {
                             pd.dismiss();
-                            ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, allproducts){
-                                @Override
-                                public View getView(int position, View convertView, ViewGroup parent){
-                                    View view = super.getView(position, convertView, parent);
-                                    if (position ==0 || position == 7 || position == 14 || position == 21){
-                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                                        String underlined = "<u>" + tv.getText() + "</u>";
-                                        tv.setText(Html.fromHtml(underlined));
-                                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,20);
-                                    }
-                                    if(position == 6 || position == 13 || position == 20 || position == 27){
-                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                                        tv.setTextColor(Color.parseColor("#0000FF"));
-                                    }
-                                    else{
-                                        TextView tv = (TextView) view.findViewById(android.R.id.text1);
-                                        tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP,16);
-                                    }
-                                    return view;
-                                }
-                            };
-                            listview.setAdapter(adapter);
+                            listview.setAdapter(adaptor);
                         }
                     }, 6000);
 
@@ -202,36 +180,68 @@ public class Main2Activity extends AppCompatActivity {
         });
     }
 
+    class MyAdaptor extends ArrayAdapter<String>{
+        Context context;
+        ArrayList<String> aboutproduct;
+        ArrayList<String> producturl;
+        ArrayList<String> producttitle;
+        ArrayList<String> imageurl;
+        MyAdaptor(Context c, ArrayList<String> aboutproduct, ArrayList<String> producturl,ArrayList<String> producttitle, ArrayList<String> imageurl){
+            super(c,R.layout.row,R.id.textView1,aboutproduct);
+            this.context = c;
+            this.aboutproduct = aboutproduct;
+            this.producturl = producturl;
+            this.producttitle = producttitle;
+            this.imageurl = imageurl;
+        }
+
+        @NonNull
+        @Override
+        public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+            LayoutInflater layoutInflater = (LayoutInflater)getApplicationContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            View row = layoutInflater.inflate(R.layout.row,parent,false);
+
+            TextView producttitleshow = row.findViewById(R.id.textView1);
+            TextView aboutproductdisplay = row.findViewById(R.id.textView2);
+            ImageView iv = row.findViewById(R.id.productimage);
+            Context context = parent.getContext();
+            try {
+                Picasso.with(context).load(imageurl.get(position)).into(iv);
+            }catch(Exception m){
+
+            }
+            aboutproductdisplay.setText(aboutproduct.get(position));
+            producttitleshow.setText(producttitle.get(position));
+
+            return row;
+        }
+    }
+
+
 
     private class Flipkart extends AsyncTask<String, Void, ArrayList<String>> {
+        ArrayList<String> temptitlestore = new ArrayList<>();
         ArrayList<String> tempurlstore = new ArrayList<>();
+        ArrayList<String> tempimageurl = new ArrayList<>();
         String link;
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
-            ArrayAdapter<String> adapter = null;
-            String product;
-            String urlstore;
+            String product, urlstore,title,imagelink;
             super.onPostExecute(s);
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 5; j++) {
                 product = s.get(j);
+                title = temptitlestore.get(j);
+                titleallproducts.add(title);
                 urlstore = tempurlstore.get(j);
                 allproducts.add(product);
                 producturl.add(urlstore);
+                imagelink = tempimageurl.get(j);
+                imageurls.add(imagelink);
             }
-            String seemore = "See more products on website....";
-            allproducts.add(seemore);
-            producturl.add(link);
-
-//            listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//                @Override
-//                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                    String link = tempurlstore.get(position-1);
-//                    Intent intent = new Intent((Intent.ACTION_VIEW));
-//                    intent.setData(Uri.parse(link));
-//                    startActivity(intent);
-//                }
-//            });
+//            String seemore = "See more products on website....";
+//            allproducts.add(seemore);
+//            producturl.add(link);
 
         }
 
@@ -244,12 +254,12 @@ public class Main2Activity extends AppCompatActivity {
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 Elements maskssans = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("FLIPKART");
-                link = strings[0];
-                tempurlstore.add("https://www.flipkart.com");
+//                mainlist.add("FLIPKART");
+//                link = strings[0];
+//                tempurlstore.add("https://www.flipkart.com");
 
                 for (Element testlink1 : links) {
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
                     String permanent1 = null;
 
                     Elements eltitle1 = testlink1.getElementsByClass("_3wU53n");
@@ -265,6 +275,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
                             Elements elpriceafter = link.getElementsByClass("_1vC4OE _2rQ-NK");
+
+                            Elements elproductimage = link.getElementsByClass("_3BTv9X");
 
 
                             Elements discount = link.getElementsByClass("VGWI6T");
@@ -313,25 +325,31 @@ public class Main2Activity extends AppCompatActivity {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
 
+                            for(Element elimage : elproductimage){
+                                temp6 = elimage.attr("src");
+                            }
+
                             if (elpricebefore.text()==null)
                             {
-                                permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                                permanent1 = "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
                             }
 
                             else
                             {
-                                permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                                permanent1 = temp2 + "\n"  + temp3 + "\n" + temp4 + "\n";
 
                             }
+                            temptitlestore.add(temp1);
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
+                            tempimageurl.add(temp6);
                         }
                     }
                 }
 
                 for (Element testlink2 : links1) {
                     Elements Testrun = testlink2.getElementsByClass("_1rcHFq");
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
                     String permanent1 = null;
 
                     if (Testrun.size() > 0) {
@@ -346,6 +364,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
                             Elements elpriceafter1 = link1.getElementsByClass("_3auQ3N");
+
+                            Elements elproductimage = link1.getElementsByClass("_3BTv9X");
 
                             Elements discount1 = link1.getElementsByClass("VGWI6T");
 
@@ -381,19 +401,25 @@ public class Main2Activity extends AppCompatActivity {
                                     temp5 = "https://www.flipkart.com" + linkArray.get(0);
                                 }
 
+                                for(Element elimage : elproductimage){
+                                    temp6 = elimage.attr("src");
+                                }
+
 
                                 if (elpricebefore1.text()==null)
                                 {
-                                    permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter1.text() + "\n" + temp4 + "\n";
+                                    permanent1 = "Price :" + elpriceafter1.text() + "\n" + temp4 + "\n";
                                 }
 
                                 else
                                 {
-                                    permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                                    permanent1 =temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                                 }
+                                temptitlestore.add(temp1);
                                 mainlist.add(permanent1);
                                 tempurlstore.add(temp5);
+                                tempimageurl.add(temp6);
                             }
                         }
                     }
@@ -403,7 +429,7 @@ public class Main2Activity extends AppCompatActivity {
                     //BatchUpdates
                     Elements fashiontitle = fashion.getElementsByClass("_2mylT6");
 
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
                     String permanent1 = null;
 
                     if (fashiontitle.size() > 0) {
@@ -418,6 +444,7 @@ public class Main2Activity extends AppCompatActivity {
 
                             Elements fpriceafter = fash.getElementsByClass("_1vC4OE");
 
+                            Elements elproductimage = fash.getElementsByClass("_3togXc");
 
                             Elements fdiscount = fash.getElementsByClass("VGWI6T");
 
@@ -444,6 +471,10 @@ public class Main2Activity extends AppCompatActivity {
 
                             }
 
+                            for(Element elimage : elproductimage){
+                                temp6 = elimage.attr("src");
+                            }
+
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element felementLink : flink) {
                                 String fMainLink = felementLink.attr("href");
@@ -455,16 +486,18 @@ public class Main2Activity extends AppCompatActivity {
 
                             if (fpricebefore.text()==null)
                             {
-                                permanent1 = "\n" + temp1 + "\n" + "Price :" + fpriceafter.text() + "\n" + temp4 + "\n";
+                                permanent1 = "Price :" + fpriceafter.text() + "\n" + temp4 + "\n";
                             }
 
                             else
                             {
-                                permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                                permanent1 =temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                             }
+                            temptitlestore.add(temp1);
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
+                            tempimageurl.add(temp6);
                         }
 
                     }
@@ -474,7 +507,7 @@ public class Main2Activity extends AppCompatActivity {
                 for (Element maska : maskssans) {
                     Elements masktitle = maska.getElementsByClass("_2cLu-l");
 
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
                     String permanent1 = null;
 
                     if (masktitle.size() > 0) {
@@ -489,6 +522,8 @@ public class Main2Activity extends AppCompatActivity {
 
 
                             Elements mpriceafter = mask.getElementsByClass("_1vC4OE");
+
+                            Elements elproductimage =  mask.getElementsByClass("Zhf2z-");
 
 
                             Elements mdiscount = mask.getElementsByClass("VGWI6T");
@@ -515,6 +550,10 @@ public class Main2Activity extends AppCompatActivity {
 
                             }
 
+                            for(Element elimage : elproductimage){
+                                temp6 = elimage.attr("src");
+                            }
+
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element melementLink : mlink) {
                                 String fMainLink = melementLink.attr("href");
@@ -526,16 +565,18 @@ public class Main2Activity extends AppCompatActivity {
 
                             if (mpricebefore.text()==null)
                             {
-                                permanent1 = "\n" + temp1 + "\n" + "Price :" + mpriceafter.text() + "\n" + temp4 + "\n";
+                                permanent1 = "Price :" + mpriceafter.text() + "\n" + temp4 + "\n";
                             }
 
                             else
                             {
-                                permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                                permanent1 =temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                             }
+                            temptitlestore.add(temp1);
                             mainlist.add(permanent1);
                             tempurlstore.add(temp5);
+                            tempimageurl.add(temp6);
 
                         }
                     }
@@ -552,24 +593,32 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private class Snapdeal extends AsyncTask<String, Void, ArrayList<String>> {
+        ArrayList<String> temptitlestore = new ArrayList<>();
         ArrayList<String> tempurlstore = new ArrayList<>();
+        ArrayList<String> tempimageurl = new ArrayList<>();
         String link;
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
-            String product;
-            String urlstore;
+            String product, urlstore,title,imagelink;
+
             super.onPostExecute(s);
 
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 5; j++) {
                 product = s.get(j);
+                title = temptitlestore.get(j);
+                titleallproducts.add(title);
                 urlstore = tempurlstore.get(j);
                 allproducts.add(product);
                 producturl.add(urlstore);
+                imagelink = tempimageurl.get(j);
+                imageurls.add(imagelink);
             }
-            String seemore = "See more products on website....";
-            allproducts.add(seemore);
-            producturl.add(link);
+//            String test = "Snapdeal";
+//            String seemore = "See more products on website....";
+//            titleallproducts.add(test);
+//            allproducts.add(seemore);
+//            producturl.add(link);
 
         }
 
@@ -580,13 +629,13 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("SNAPDEAL");
-                link = strings[0];
-                tempurlstore.add("https://www.snapdeal.com");
+//                mainlist.add("SNAPDEAL");
+//                link = strings[0];
+//                tempurlstore.add("https://www.snapdeal.com");
 
 
                 for (Element link : links) {
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null, temp6 = null;
                     String permanent1 = null;
 
                     Elements elLink = link.getElementsByTag("a");
@@ -596,6 +645,8 @@ public class Main2Activity extends AppCompatActivity {
                     Elements elpricebefore = link.getElementsByClass("lfloat product-desc-price strike ");
 
                     Elements elpriceafter = link.getElementsByClass("lfloat product-price");
+
+                    Elements elproductimage = link.getElementsByClass("product-image ");
 
                     Elements discount = link.getElementsByClass("product-discount");
 
@@ -620,6 +671,10 @@ public class Main2Activity extends AppCompatActivity {
                         temp4 = "Discount: " + productdiscount.text();
                     }
 
+                    for(Element elimage : elproductimage){
+                        temp6 = elimage.attr("src");
+                    }
+
                     ArrayList<String> linkArray = new ArrayList<String>();
                     for (Element elementLink : elLink) {
                         String MainLink = elementLink.attr("href");
@@ -632,16 +687,18 @@ public class Main2Activity extends AppCompatActivity {
 
                     if (elpricebefore.text()==null)
                     {
-                        permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                        permanent1 = "\n"+ "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
                     }
 
                     else
                     {
-                        permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                        permanent1 ="\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                     }
+                    temptitlestore.add(temp1);
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
+                    tempimageurl.add(temp6);
 
                 }
                 return mainlist;
@@ -656,22 +713,24 @@ public class Main2Activity extends AppCompatActivity {
 
     public class Paytm extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> tempurlstore = new ArrayList<>();
+        ArrayList<String> temptitlestore = new ArrayList<>();
+        ArrayList<String> tempimageurl = new ArrayList<>();
         String link;
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
-            String product;
-            String urlstore;
+            String product, urlstore,title,imagelink;
             super.onPostExecute(s);
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 5; j++) {
                 product = s.get(j);
+                title = temptitlestore.get(j);
+                titleallproducts.add(title);
                 urlstore = tempurlstore.get(j);
                 allproducts.add(product);
                 producturl.add(urlstore);
+                imagelink = tempimageurl.get(j);
+                imageurls.add(imagelink);
             }
-            String seemore = "See more products on website....";
-            allproducts.add(seemore);
-            producturl.add(link);
         }
 
         @Override
@@ -680,12 +739,12 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("PAYTM");
-                link = strings[0];
-                tempurlstore.add("https://www.paytmmall.com");
+//                mainlist.add("PAYTM");
+//                link = strings[0];
+//                tempurlstore.add("https://www.paytmmall.com");
 
                 for (Element link : links) {
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
                     String permanent1 = null;
 
                     Elements elLink = link.getElementsByTag("a");
@@ -695,6 +754,8 @@ public class Main2Activity extends AppCompatActivity {
                     Elements elpricebefore = link.getElementsByClass("dQm2");
 
                     Elements elpriceafter = link.getElementsByClass("_1kMS");
+
+                    Elements elproductimage = link.getElementsByTag("img");
 
                     Elements discount = link.getElementsByClass("c-ax");
 
@@ -736,18 +797,24 @@ public class Main2Activity extends AppCompatActivity {
                         temp5 = "https://www.paytmmall.com" + linkArray.get(0);
                     }
 
+                    for(Element elimage : elproductimage){
+                        temp6 = elimage.attr("src");
+                    }
+
                     if (elpricebefore.text()==null)
                     {
-                        permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                        permanent1 = "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
                     }
 
                     else
                     {
-                        permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                        permanent1 = temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                     }
+                    temptitlestore.add(temp1);
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
+                    tempimageurl.add(temp6);
 
                 }
                 return mainlist;
@@ -761,23 +828,28 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     private class Shopclues extends AsyncTask<String, Void, ArrayList<String>> {
+        ArrayList<String> temptitlestore = new ArrayList<>();
         ArrayList<String> tempurlstore = new ArrayList<>();
+        ArrayList<String> tempimageurl = new ArrayList<>();
         String link;
 
         @Override
         protected void onPostExecute(ArrayList<String> s) {
-            String product;
-            String urlstore;
+            String product, urlstore,title,imagelink;
             super.onPostExecute(s);
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < 5; j++) {
                 product = s.get(j);
+                title = temptitlestore.get(j);
+                titleallproducts.add(title);
                 urlstore = tempurlstore.get(j);
                 allproducts.add(product);
                 producturl.add(urlstore);
+                imagelink = tempimageurl.get(j);
+                imageurls.add(imagelink);
             }
-            String seemore = "See more products on website....";
-            allproducts.add(seemore);
-            producturl.add(link);
+//            String seemore = "See more products on website....";
+//            allproducts.add(seemore);
+//            producturl.add(link);
 
         }
 
@@ -787,13 +859,13 @@ public class Main2Activity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("column col3 search_blocks");
                 ArrayList<String> mainlist = new ArrayList<String>();
-                mainlist.add("SHOPCLUES");
-                link = strings[0];
-                tempurlstore.add("https://www.shopclues.com");
+//                mainlist.add("SHOPCLUES");
+//                link = strings[0];
+//                tempurlstore.add("https://www.shopclues.com");
 
 
                 for (Element link : links) {
-                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null;
+                    String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
                     String permanent1 = null;
 
                     Elements elLink = link.getElementsByTag("a");
@@ -803,6 +875,8 @@ public class Main2Activity extends AppCompatActivity {
                     Elements elpricebefore = link.getElementsByClass("old_prices");
 
                     Elements elpriceafter = link.getElementsByClass("p_price");
+
+                    Elements elproductimage = link.getElementsByTag("img");
 
                     Elements discount = link.getElementsByClass("prd_discount");
 
@@ -827,6 +901,10 @@ public class Main2Activity extends AppCompatActivity {
                         temp4 = "Discount: " + productdiscount.text();
                     }
 
+                    for(Element elimage : elproductimage){
+                        temp6 = elimage.attr("src");
+                    }
+
                     ArrayList<String> linkArray = new ArrayList<String>();
                     for (Element elementLink : elLink) {
                         String MainLink = elementLink.attr("href");
@@ -839,16 +917,18 @@ public class Main2Activity extends AppCompatActivity {
 
                     if (elpricebefore.text()==null)
                     {
-                        permanent1 = "\n" + temp1 + "\n" + "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                        permanent1 = "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
                     }
 
                     else
                     {
-                        permanent1 ="\n" +  temp1 + "\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                        permanent1 =temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                     }
+                    temptitlestore.add(temp1);
                     mainlist.add(permanent1);
                     tempurlstore.add(temp5);
+                    tempimageurl.add(temp6);
 
                 }
                 return mainlist;
@@ -900,8 +980,10 @@ public class Main2Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        temparraylist = null;
-        tempurllist = null;
+        ArrayList<String> empty = new ArrayList<>();
+        empty.add("");
+        ArrayAdapter adp = new ArrayAdapter(Main2Activity.this, android.R.layout.simple_list_item_1, empty);
+        listview.setAdapter(adp);
         super.onBackPressed();
     }
 
