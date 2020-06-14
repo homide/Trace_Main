@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
     String searchtext;
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
+    ArrayList<String> previousreuslt = new ArrayList<>();
 
     public void flipkartButton(View view){
         Intent intent = new Intent((Intent.ACTION_VIEW));
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         searchButton = (Button) findViewById(R.id.btnSearch1);
         listview = (ListView) findViewById(R.id.listView);
 
+
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,7 +78,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this, "Please add something to search.", Toast.LENGTH_SHORT).show();
                 }
                 else {
-                    ProgressDialog pd = new ProgressDialog(MainActivity.this);
+                    previousreuslt.add(searchtext);
+                    final ProgressDialog pd = new ProgressDialog(MainActivity.this);
                     pd.setMessage("Searching websites...");
                     pd.show();
                     Thread t1 = new Thread() {
@@ -114,10 +117,14 @@ public class MainActivity extends AppCompatActivity {
                         new Handler().postDelayed(new Runnable() {
                             @Override
                             public void run() {
+                                Main2Activity m2a = new Main2Activity();
+                                m2a.listview = null;
+                                pd.dismiss();
                                 Intent intent = new Intent(MainActivity.this, Main2Activity.class);
                                 Bundle args = new Bundle();
                                 args.putSerializable("ARRAYLIST", (Serializable) allproducts);
                                 args.putSerializable("URLLINKS", (Serializable) producturl);
+                                args.putSerializable("PRESULTS", (Serializable) previousreuslt);
                                 intent.putExtra("BUNDLE", args);
                                 intent.putExtra(EXTRA_TEXT, searchtext);
                                 startActivity(intent);
@@ -126,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
 
                 }
             }
+
         });
 
     }

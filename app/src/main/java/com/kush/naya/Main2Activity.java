@@ -1,5 +1,6 @@
 package com.kush.naya;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -39,26 +40,32 @@ public class Main2Activity extends AppCompatActivity {
     public TextView resultText;
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
+    ArrayList<String> temparraylist;
+    ArrayList<String> tempurllist;
 
-
+    @SuppressLint("StaticFieldLeak")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
+
+        listview = (ListView) findViewById(R.id.listView);
         Intent intent = getIntent();
-        listview = null;
         String input1 = intent.getStringExtra(MainActivity.EXTRA_TEXT);
         Bundle args = intent.getBundleExtra("BUNDLE");
-        ArrayList<String> temparraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
-        final ArrayList<String> tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
-        listview = (ListView) findViewById(R.id.listView);
+        temparraylist = (ArrayList<String>) args.getSerializable("ARRAYLIST");
+        tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
+        ArrayList<String> previousresults = (ArrayList<String>) args.getSerializable("PRESULTS");
+
 
         TextView resultText = (TextView) findViewById(R.id.resultText);
         resultText.setText("Showing Results for: "+input1);
 
 
+
         if (temparraylist.isEmpty() != true) {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(Main2Activity.this, android.R.layout.simple_list_item_1, temparraylist){
+
                 @Override
                 public View getView(int position, View convertView, ViewGroup parent){
                     View view = super.getView(position, convertView, parent);
@@ -79,6 +86,7 @@ public class Main2Activity extends AppCompatActivity {
                     return view;
                 }
             };
+
             listview.setAdapter(adapter);
             listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                 @Override
@@ -98,6 +106,7 @@ public class Main2Activity extends AppCompatActivity {
 
 
         button2.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("StaticFieldLeak")
             @Override
             public void onClick(View v) {
 
@@ -192,7 +201,7 @@ public class Main2Activity extends AppCompatActivity {
             }
         });
     }
-    //
+
 
     private class Flipkart extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> tempurlstore = new ArrayList<>();
@@ -890,11 +899,10 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-//        Intent categoryIntent = new Intent (Main2Activity.this, MainActivity.class);
-//        startActivity(categoryIntent);
-//        finish();
-        startActivity(new Intent(Main2Activity.this,MainActivity.class));
-        finish();
+    public void onBackPressed(){
+        temparraylist = null;
+        tempurllist = null;
+        super.onBackPressed();
     }
+
 }
