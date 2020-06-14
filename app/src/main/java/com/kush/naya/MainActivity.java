@@ -138,8 +138,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-
     private class Flipkart extends AsyncTask<String, Void, ArrayList<String>> {
         ArrayList<String> temptitlestore = new ArrayList<>();
         ArrayList<String> tempurlstore = new ArrayList<>();
@@ -608,12 +606,12 @@ public class MainActivity extends AppCompatActivity {
 
                     if (elpricebefore.text()==null)
                     {
-                        permanent1 = "\n"+ "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                        permanent1 = "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
                     }
 
                     else
                     {
-                        permanent1 ="\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                        permanent1 = temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                     }
                     temptitlestore.add(temp1);

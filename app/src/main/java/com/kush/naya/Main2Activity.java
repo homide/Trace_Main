@@ -40,7 +40,6 @@ public class Main2Activity extends AppCompatActivity {
     public Button button2;
     public EditText usersearch;
     public String search;
-    public TextView resultText;
     ArrayList<String> titleallproducts = new ArrayList<String>();
     ArrayList<String> allproducts = new ArrayList<String>(); // all products combine
     ArrayList<String> producturl = new ArrayList<String>();
@@ -49,6 +48,7 @@ public class Main2Activity extends AppCompatActivity {
     ArrayList<String> tempurllist;
     ArrayList<String> tempimageurl;
     ArrayList<String> tempproducttitle;
+    TextView resultText;
 
     @SuppressLint("StaticFieldLeak")
     @Override
@@ -64,10 +64,7 @@ public class Main2Activity extends AppCompatActivity {
         tempurllist = (ArrayList<String>) args.getSerializable("URLLINKS");
         tempimageurl = (ArrayList<String>) args.getSerializable("IMAGEURL");
         tempproducttitle = (ArrayList<String>) args.getSerializable("PRODUCTTITLE");
-
-
-
-        TextView resultText = (TextView) findViewById(R.id.resultText);
+        resultText= (TextView) findViewById(R.id.resultText);
         resultText.setText("Showing Results for: "+input1);
 
 //        MyAdaptor adaptor = new MyAdaptor(this,temparraylist,tempurllist);
@@ -115,6 +112,7 @@ public class Main2Activity extends AppCompatActivity {
                     final ProgressDialog pd = new ProgressDialog(Main2Activity.this);
                     pd.setMessage("Searching websites...");
                     pd.show();
+                    resultText.setText("Showing Results for: "+usersearch.getText());
                     if(allproducts.size() > 0){
                         allproducts.clear();
                     }
@@ -981,10 +979,9 @@ public class Main2Activity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        ArrayList<String> empty = new ArrayList<>();
-        empty.add("");
-        ArrayAdapter adp = new ArrayAdapter(Main2Activity.this, android.R.layout.simple_list_item_1, empty);
-        listview.setAdapter(adp);
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
         super.onBackPressed();
     }
 
