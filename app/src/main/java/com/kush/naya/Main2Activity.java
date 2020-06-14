@@ -72,6 +72,7 @@ public class Main2Activity extends AppCompatActivity {
 
 //        MyAdaptor adaptor = new MyAdaptor(this,temparraylist,tempurllist);
 //        listview.setAdapter(adaptor);
+        //test comment
 
 //        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
