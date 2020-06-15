@@ -148,7 +148,8 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> s) {
             String product, urlstore,title,imagelink;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
                 title = temptitlestore.get(j);
                 titleallproducts.add(title);
@@ -158,9 +159,13 @@ public class MainActivity extends AppCompatActivity {
                 imagelink = tempimageurl.get(j);
                 imageurls.add(imagelink);
             }
-//            String seemore = "See more products on website....";
-//            allproducts.add(seemore);
-//            producturl.add(link);
+            String seemore = "SHOW MORE PRODUCTS ON FLIPKART......";
+            String seemoreimage = "https://previews.123rf.com/images/brisker/brisker1605/brisker160500027/58489983-16-icons-of-different-products-categories-for-online-shops.jpg";
+            allproducts.add("");
+            titleallproducts.add(seemore);
+            producturl.add(link);
+            imageurls.add(seemoreimage);
+
 
         }
 
@@ -173,9 +178,14 @@ public class MainActivity extends AppCompatActivity {
                 Elements fashions = doc.getElementsByClass("IIdQZO _1SSAGr");
                 Elements maskssans = doc.getElementsByClass("_3liAhj");
                 ArrayList<String> mainlist = new ArrayList<String>();
-//                mainlist.add("FLIPKART");
-//                link = strings[0];
-//                tempurlstore.add("https://www.flipkart.com");
+                link = strings[0];
+                String title = "FLIPKART PRODUCTS";
+                String url = "https://www.flipkart.com";
+                String imageurl = "https://images.news18.com/ibnlive/uploads/2019/08/flipkart.jpg";
+                temptitlestore.add(title);
+                tempurlstore.add(url);
+                tempimageurl.add(imageurl);
+                mainlist.add("");
 
                 for (Element testlink1 : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
@@ -195,7 +205,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements elpriceafter = link.getElementsByClass("_1vC4OE _2rQ-NK");
 
-                            Elements image = link.select("img");
+                            Elements elproductimage = link.getElementsByClass("_3BTv9X");
 
 
                             Elements discount = link.getElementsByClass("VGWI6T");
@@ -244,7 +254,7 @@ public class MainActivity extends AppCompatActivity {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
 
-                            for(Element elimage : image){
+                            for(Element elimage : elproductimage){
                                 temp6 = elimage.attr("src");
                             }
 
@@ -284,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements elpriceafter1 = link1.getElementsByClass("_3auQ3N");
 
-                            Elements image = link1.select("img");
+                            Elements elproductimage = link1.getElementsByClass("_3BTv9X");
 
                             Elements discount1 = link1.getElementsByClass("VGWI6T");
 
@@ -320,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                                     temp5 = "https://www.flipkart.com" + linkArray.get(0);
                                 }
 
-                                for(Element elimage : image){
+                                for(Element elimage : elproductimage){
                                     temp6 = elimage.attr("src");
                                 }
 
@@ -363,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements fpriceafter = fash.getElementsByClass("_1vC4OE");
 
-                            Elements image = fash.select("img");
+                            Elements elproductimage = fash.getElementsByClass("_3togXc");
 
                             Elements fdiscount = fash.getElementsByClass("VGWI6T");
 
@@ -390,7 +400,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                            for(Element elimage : image){
+                            for(Element elimage : elproductimage){
                                 temp6 = elimage.attr("src");
                             }
 
@@ -442,7 +452,7 @@ public class MainActivity extends AppCompatActivity {
 
                             Elements mpriceafter = mask.getElementsByClass("_1vC4OE");
 
-                            Elements image = mask.select("img");
+                            Elements elproductimage =  mask.getElementsByClass("Zhf2z-");
 
 
                             Elements mdiscount = mask.getElementsByClass("VGWI6T");
@@ -469,7 +479,7 @@ public class MainActivity extends AppCompatActivity {
 
                             }
 
-                            for(Element elimage : image){
+                            for(Element elimage : elproductimage){
                                 temp6 = elimage.attr("src");
                             }
 
@@ -522,8 +532,7 @@ public class MainActivity extends AppCompatActivity {
             String product, urlstore,title,imagelink;
 
             super.onPostExecute(s);
-
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
                 title = temptitlestore.get(j);
                 titleallproducts.add(title);
@@ -533,11 +542,12 @@ public class MainActivity extends AppCompatActivity {
                 imagelink = tempimageurl.get(j);
                 imageurls.add(imagelink);
             }
-//            String test = "Snapdeal";
-//            String seemore = "See more products on website....";
-//            titleallproducts.add(test);
-//            allproducts.add(seemore);
-//            producturl.add(link);
+            String seemore = "SHOW MORE PRODUCTS ON SNAPDEAL......";
+            String seemoreimage = "https://previews.123rf.com/images/brisker/brisker1605/brisker160500027/58489983-16-icons-of-different-products-categories-for-online-shops.jpg";
+            allproducts.add("");
+            titleallproducts.add(seemore);
+            producturl.add(link);
+            imageurls.add(seemoreimage);
 
         }
 
@@ -548,9 +558,14 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("col-xs-6  favDp product-tuple-listing js-tuple ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-//                mainlist.add("SNAPDEAL");
-//                link = strings[0];
-//                tempurlstore.add("https://www.snapdeal.com");
+                link = strings[0];
+                String title = "SNAPDEAL PRODUCTS";
+                String url = "https://www.snapdeal.com";
+                String imageurl = "https://www.apkmirror.com/wp-content/uploads/2018/12/5c0671b80df76.png";
+                temptitlestore.add(title);
+                tempurlstore.add(url);
+                tempimageurl.add(imageurl);
+                mainlist.add("");
 
 
                 for (Element link : links) {
@@ -606,12 +621,12 @@ public class MainActivity extends AppCompatActivity {
 
                     if (elpricebefore.text()==null)
                     {
-                        permanent1 = "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
+                        permanent1 = "\n"+ "Price :" + elpriceafter.text() + "\n" + temp4 + "\n";
                     }
 
                     else
                     {
-                        permanent1 = temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
+                        permanent1 ="\n" + temp2 + "\n" + temp3 + "\n" + temp4 + "\n";
 
                     }
                     temptitlestore.add(temp1);
@@ -640,7 +655,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> s) {
             String product, urlstore,title,imagelink;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
                 title = temptitlestore.get(j);
                 titleallproducts.add(title);
@@ -650,6 +665,12 @@ public class MainActivity extends AppCompatActivity {
                 imagelink = tempimageurl.get(j);
                 imageurls.add(imagelink);
             }
+            String seemore = "SHOW MORE PRODUCTS ON PAYTM MALL......";
+            String seemoreimage = "https://previews.123rf.com/images/brisker/brisker1605/brisker160500027/58489983-16-icons-of-different-products-categories-for-online-shops.jpg";
+            allproducts.add("");
+            titleallproducts.add(seemore);
+            producturl.add(link);
+            imageurls.add(seemoreimage);
         }
 
         @Override
@@ -658,9 +679,14 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("_3WhJ");
                 ArrayList<String> mainlist = new ArrayList<String>();
-//                mainlist.add("PAYTM");
-//                link = strings[0];
-//                tempurlstore.add("https://www.paytmmall.com");
+                link = strings[0];
+                String title = "PAYTM MALL PRODUCTS";
+                String url = "https://www.paytmmall.com";
+                String imageurl = "https://img.etimg.com/thumb/width-640,height-480,imgsize-19837,resizemode-1,msid-60726247/.jpg";
+                temptitlestore.add(title);
+                tempurlstore.add(url);
+                tempimageurl.add(imageurl);
+                mainlist.add("");
 
                 for (Element link : links) {
                     String temp1 = null, temp2 = null, temp3 = null, temp4 = null, temp5 = null,temp6 = null;
@@ -756,7 +782,7 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<String> s) {
             String product, urlstore,title,imagelink;
             super.onPostExecute(s);
-            for (int j = 0; j < 5; j++) {
+            for (int j = 0; j < 6; j++) {
                 product = s.get(j);
                 title = temptitlestore.get(j);
                 titleallproducts.add(title);
@@ -766,10 +792,12 @@ public class MainActivity extends AppCompatActivity {
                 imagelink = tempimageurl.get(j);
                 imageurls.add(imagelink);
             }
-//            String seemore = "See more products on website....";
-//            allproducts.add(seemore);
-//            producturl.add(link);
-
+            String seemore = "SHOW MORE PRODUCTS ON SHOPCLUES......";
+            String seemoreimage = "https://previews.123rf.com/images/brisker/brisker1605/brisker160500027/58489983-16-icons-of-different-products-categories-for-online-shops.jpg";
+            allproducts.add("");
+            titleallproducts.add(seemore);
+            producturl.add(link);
+            imageurls.add(seemoreimage);
         }
 
         @Override
@@ -778,9 +806,14 @@ public class MainActivity extends AppCompatActivity {
                 Document doc = Jsoup.connect(strings[0]).get();
                 Elements links = doc.getElementsByClass("column col3 search_blocks");
                 ArrayList<String> mainlist = new ArrayList<String>();
-//                mainlist.add("SHOPCLUES");
-//                link = strings[0];
-//                tempurlstore.add("https://www.shopclues.com");
+                link = strings[0];
+                String title = "SHOPCLUES PRODUCTS";
+                String url = "https://www.shopclues.com";
+                String imageurl = "https://2.bp.blogspot.com/-PhEOWIZ5RUc/WszElAqJseI/AAAAAAAAAj8/QSn5SborV2wuzVsYTCm7SJk7aoH08OQ2ACPcBGAYYCw/w680/shopclue.png";
+                temptitlestore.add(title);
+                tempurlstore.add(url);
+                tempimageurl.add(imageurl);
+                mainlist.add("");
 
 
                 for (Element link : links) {
