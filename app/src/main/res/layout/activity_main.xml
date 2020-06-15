@@ -45,7 +45,7 @@
         android:layout_height="75dp"
         android:adjustViewBounds="true"
         android:contentDescription="@null"
-        android:onClick="amazonButton"
+        android:onClick="shopcluesButton"
         android:scaleType="fitCenter"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/snap_btn"
@@ -53,7 +53,7 @@
         app:layout_constraintStart_toEndOf="@+id/flip_btn"
         app:layout_constraintTop_toBottomOf="@+id/btnSearch1"
         app:layout_constraintVertical_bias="0.887"
-        app:srcCompat="@drawable/amazon_logo" />
+        app:srcCompat="@drawable/shpcls_logo" />
 
     <ImageButton
         android:id="@+id/flip_btn"
@@ -126,5 +126,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.52"
         app:srcCompat="@drawable/traceimage" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
