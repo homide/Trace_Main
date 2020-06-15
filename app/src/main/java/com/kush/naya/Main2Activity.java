@@ -191,7 +191,11 @@ public class Main2Activity extends AppCompatActivity {
                 ImageView iv = row.findViewById(R.id.productimage);
                 Context context = parent.getContext();
                 try {
-                    Picasso.with(context).load(imageurl.get(position)).into(iv);
+                    if(imageurl.get(position).length() <=0){
+                        Picasso.with(context).load("https://1m19tt3pztls474q6z46fnk9-wpengine.netdna-ssl.com/wp-content/themes/unbound/images/No-Image-Found-400x264.png").into(iv);
+                    }else {
+                        Picasso.with(context).load(imageurl.get(position)).into(iv);
+                    }
                 } catch (Exception m) {
 
                 }
@@ -335,37 +339,11 @@ public class Main2Activity extends AppCompatActivity {
                             for (int i = 0; i < (linkArray.size()); i++) {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
-                            Document doc1 = Jsoup.connect(temp5).get();
-
-                            Elements linked = doc1.getElementsByClass("_3MF26o SGxMsH");
 
 
-                            for (Element linked1 : linked ) {
-
-                                Elements linkimg = linked1.getElementsByClass("_2_AcLJ");
-
-                                for (Element imgprod : linkimg) {
-                                    //System.out.println("Img src :" + imgprod.attr("style"));
-
-                                    String s1 = imgprod.attr("style");
-                                    char[] a1 = s1.toCharArray();
-                                    String new1 = "h";
-                                    int diff = (a1.length) - 1;
-
-                                    for (int x = 22; x <= diff - 1; x++) {
-                                        new1 = new1 + a1[x];
-                                    }
-
-                                    temp6 = new1;
-
-                                }
-
+                            for(Element elimage : elproductimage){
+                                temp6 = elimage.attr("src");
                             }
-
-
-//                            for(Element elimage : elproductimage){
-//                                temp6 = elimage.attr("src");
-//                            }
 
                             if (elpricebefore.text()==null)
                             {
@@ -439,36 +417,9 @@ public class Main2Activity extends AppCompatActivity {
                                     temp5 = "https://www.flipkart.com" + linkArray.get(0);
                                 }
 
-                                Document doc1 = Jsoup.connect(temp5).get();
-
-                                Elements linked = doc1.getElementsByClass("_3MF26o SGxMsH");
-
-
-                                for (Element linked1 : linked ) {
-
-                                    Elements linkimg = linked1.getElementsByClass("_2_AcLJ");
-
-                                    for (Element imgprod : linkimg) {
-                                        //System.out.println("Img src :" + imgprod.attr("style"));
-
-                                        String s1 = imgprod.attr("style");
-                                        char[] a1 = s1.toCharArray();
-                                        String new1 = "h";
-                                        int diff = (a1.length) - 1;
-
-                                        for (int x = 22; x <= diff - 1; x++) {
-                                            new1 = new1 + a1[x];
-                                        }
-
-                                        temp6 = new1;
-
-                                    }
-
+                                for(Element elimage : elproductimage){
+                                    temp6 = elimage.attr("src");
                                 }
-
-//                                for(Element elimage : elproductimage){
-//                                    temp6 = elimage.attr("src");
-//                                }
 
 
                                 if (elpricebefore1.text()==null)
@@ -536,45 +487,10 @@ public class Main2Activity extends AppCompatActivity {
 
                             }
 
-//                            for(Element elimage : elproductimage){
-//                                temp6 = elimage.attr("src");
-//                            }
-
-                            ArrayList<String> linkArray = new ArrayList<String>();
-                            for (Element felementLink : flink) {
-                                String fMainLink = felementLink.attr("href");
-                                linkArray.add(fMainLink);
-                            }
-                            for (int i = 0; i < (linkArray.size()); i++) {
-                                temp5 = "https://www.flipkart.com" + linkArray.get(0);
+                            for(Element elimage : elproductimage){
+                                temp6 = elimage.attr("src");
                             }
 
-                            Document doc1 = Jsoup.connect(temp5).get();
-
-                            Elements linked = doc1.getElementsByClass("_3MF26o SGxMsH");
-
-
-                            for (Element linked1 : linked ) {
-
-                                Elements linkimg = linked1.getElementsByClass("_2_AcLJ");
-
-                                for (Element imgprod : linkimg) {
-                                    //System.out.println("Img src :" + imgprod.attr("style"));
-
-                                    String s1 = imgprod.attr("style");
-                                    char[] a1 = s1.toCharArray();
-                                    String new1 = "h";
-                                    int diff = (a1.length) - 1;
-
-                                    for (int x = 22; x <= diff - 1; x++) {
-                                        new1 = new1 + a1[x];
-                                    }
-
-                                    temp6 = new1;
-
-                                }
-
-                            }
 
                             if (fpricebefore.text()==null)
                             {
@@ -642,9 +558,9 @@ public class Main2Activity extends AppCompatActivity {
 
                             }
 
-//                            for(Element elimage : elproductimage){
-//                                temp6 = elimage.attr("src");
-//                            }
+                            for(Element elimage : elproductimage){
+                                temp6 = elimage.attr("src");
+                            }
 
                             ArrayList<String> linkArray = new ArrayList<String>();
                             for (Element melementLink : mlink) {
@@ -655,32 +571,6 @@ public class Main2Activity extends AppCompatActivity {
                                 temp5 = "https://www.flipkart.com" + linkArray.get(0);
                             }
 
-                            Document doc1 = Jsoup.connect(temp5).get();
-
-                            Elements linked = doc1.getElementsByClass("_3MF26o SGxMsH");
-
-
-                            for (Element linked1 : linked ) {
-
-                                Elements linkimg = linked1.getElementsByClass("_2_AcLJ");
-
-                                for (Element imgprod : linkimg) {
-                                    //System.out.println("Img src :" + imgprod.attr("style"));
-
-                                    String s1 = imgprod.attr("style");
-                                    char[] a1 = s1.toCharArray();
-                                    String new1 = "h";
-                                    int diff = (a1.length) - 1;
-
-                                    for (int x = 22; x <= diff - 1; x++) {
-                                        new1 = new1 + a1[x];
-                                    }
-
-                                    temp6 = new1;
-
-                                }
-
-                            }
 
                             if (mpricebefore.text()==null)
                             {
